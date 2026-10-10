@@ -89,7 +89,7 @@ em { color: var(--blue); font-family: Georgia, "Times New Roman", serif; font-we
 .dashboard-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; }
 .dashboard-topbar > div { display: grid; gap: 3px; }
 .mini-label { color: var(--ink-soft); font-size: 0.68rem; letter-spacing: 0.14em; font-weight: 820; }
-.avatar { width: 44px; height: 44px; border: 0; border-radius: 50%; color: white; background: var(--coral); font-size: 0.72rem; font-weight: 800; cursor: pointer; }
+.avatar { width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; color: white; background: var(--coral); font-size: 0.72rem; font-weight: 800; cursor: pointer; }
 .role-switcher { display: grid; grid-template-columns: repeat(3,1fr); padding: 5px; margin-bottom: 28px; border-radius: 999px; background: #edf0f6; }
 .role-switcher button { border: 0; border-radius: 999px; padding: 9px 6px; color: var(--ink-soft); background: transparent; font-size: 0.76rem; font-weight: 740; cursor: pointer; }
 .role-switcher button[aria-selected="true"] { color: white; background: var(--ink); box-shadow: 0 5px 14px rgba(16,29,66,0.2); }

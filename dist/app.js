@@ -109,15 +109,6 @@ document.querySelectorAll("[data-open-dialog]").forEach((button) => {
   });
 });
 
-document.querySelectorAll("[data-view-shift]").forEach((button) => {
-  button.addEventListener("click", () => {
-    dialogTitle.textContent = button.dataset.viewShift;
-    dialogCopy.textContent = "This sample shift is open and conflict-free for your current schedule. A complete event page will be added in the next build phase.";
-    dialogMessage.textContent = "";
-    dialog.showModal();
-  });
-});
-
 document.querySelector(".dialog-close").addEventListener("click", () => dialog.close());
 dialog.addEventListener("click", (event) => {
   if (event.target === dialog) dialog.close();

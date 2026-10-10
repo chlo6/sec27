@@ -10,7 +10,7 @@ The competition document informed the project's focus on accessibility, responsi
 
 - CivicShift logo mark: original inline SVG created for this project.
 - Dashboard, calendar, opportunity art, icons, and decorative graphics: original HTML/CSS/SVG created for this project.
-- No stock photography, external icon library, website template, or third-party visual asset is used in the current homepage.
+- No stock photography, external icon library, website template, or third-party visual asset is used in the current website or demonstration portal.
 
 ## Typography
 
@@ -18,4 +18,4 @@ The competition document informed the project's focus on accessibility, responsi
 
 ## Demo content
 
-All organizations, opportunities, dates, capacity figures, hours, and dashboard metrics shown on the homepage are fictional demonstration content. They are not claims about real organizations or users.
+All names, organizations, schools, opportunities, dates, contact details, capacity figures, hours, messages, and dashboard metrics shown across the website are fictional demonstration content. They are not claims about real organizations or people.

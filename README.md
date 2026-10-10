@@ -28,6 +28,7 @@ Then open `http://localhost:4173`.
 - `dist/index.html` — semantic page content
 - `dist/styles.css` — responsive visual system and layout
 - `dist/app.js` — interactions and UI state
+- `dist/favicon.svg` — original browser icon
 - `.openai/hosting.json` — hosting configuration
 - `SOURCES.md` — source and asset documentation
 

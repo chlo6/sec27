@@ -12,6 +12,10 @@ The competition document informed the project's focus on accessibility, responsi
 - Dashboard, calendar, opportunity art, icons, and decorative graphics: original HTML/CSS/SVG created for this project.
 - No stock photography, external icon library, website template, or third-party visual asset is used in the current homepage.
 
+## Font comparison page
+
+The optional `fonts.html` design-lab page loads the following open-source families from Google Fonts for visual comparison: Manrope, Space Grotesk, Plus Jakarta Sans, Sora, DM Sans, and Fraunces. These fonts are not yet applied to the main CivicShift homepage.
+
 ## Demo content
 
 All organizations, opportunities, dates, capacity figures, hours, and dashboard metrics shown on the homepage are fictional demonstration content. They are not claims about real organizations or users.

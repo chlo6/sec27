@@ -29,6 +29,9 @@ Then open `http://localhost:4173`.
 - `dist/styles.css` — responsive visual system and layout
 - `dist/app.js` — interactions and UI state
 - `dist/favicon.svg` — original browser icon
+- `dist/fonts.html` — interactive font comparison page
+- `dist/font-preview.css` — font specimen layout and styles
+- `dist/font-preview.js` — custom sample text and shortlist interactions
 - `.openai/hosting.json` — hosting configuration
 - `SOURCES.md` — source and asset documentation
 

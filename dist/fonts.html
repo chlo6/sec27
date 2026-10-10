@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f3ea" />
+    <meta name="description" content="Compare font directions for the CivicShift website." />
+    <title>CivicShift Font Shortlist</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="font-preview.css" />
+    <script src="font-preview.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#font-grid">Skip to font options</a>
+
+    <header>
+      <a class="back-link" href="index.html" aria-label="Back to CivicShift homepage">
+        <span aria-hidden="true">←</span> Back to CivicShift
+      </a>
+      <span class="page-label">DESIGN LAB / TYPE</span>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div>
+          <p class="eyebrow"><span></span> Font shortlist</p>
+          <h1>Same message.<br /><em>Six personalities.</em></h1>
+        </div>
+        <div class="intro-copy">
+          <p>Compare each option using the same words and interface pieces. Click “Favorite this look” to mark the ones you like.</p>
+          <p class="note"><strong>My starting pick:</strong> Manrope feels friendly, modern, and readable without looking like a generic school portal.</p>
+        </div>
+      </section>
+
+      <section class="control-bar" aria-label="Font preview controls">
+        <label for="sample-text">Try your own sentence</label>
+        <div>
+          <input id="sample-text" type="text" value="The quick brown fox jumps over the lazy dog." maxlength="90" />
+          <button type="button" id="reset-sample">Reset</button>
+        </div>
+      </section>
+
+      <section class="font-grid" id="font-grid">
+        <article class="font-card recommendation" data-font-card data-font-name="Manrope">
+          <div class="card-top">
+            <div><span class="number">01</span><h2>Manrope</h2></div>
+            <span class="badge">Recommended</span>
+          </div>
+          <p class="personality">Warm · capable · highly readable</p>
+          <div class="specimen font-manrope">
+            <p class="sample-heading" data-sample>The quick brown fox jumps over the lazy dog.</p>
+            <p class="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz · 0123456789</p>
+            <div class="ui-row"><button type="button">Find a shift <span>→</span></button><span>4 spots left</span></div>
+          </div>
+          <button class="favorite" type="button" aria-pressed="false"><span>♡</span> Favorite this look</button>
+        </article>
+
+        <article class="font-card" data-font-card data-font-name="Space Grotesk">
+          <div class="card-top">
+            <div><span class="number">02</span><h2>Space Grotesk</h2></div>
+            <span class="badge badge-blue">Most distinctive</span>
+          </div>
+          <p class="personality">Bold · clever · technology-forward</p>
+          <div class="specimen font-space">
+            <p class="sample-heading" data-sample>The quick brown fox jumps over the lazy dog.</p>
+            <p class="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz · 0123456789</p>
+            <div class="ui-row"><button type="button">Find a shift <span>→</span></button><span>4 spots left</span></div>
+          </div>
+          <button class="favorite" type="button" aria-pressed="false"><span>♡</span> Favorite this look</button>
+        </article>
+
+        <article class="font-card" data-font-card data-font-name="Plus Jakarta Sans">
+          <div class="card-top">
+            <div><span class="number">03</span><h2>Plus Jakarta Sans</h2></div>
+            <span class="badge badge-mint">Polished</span>
+          </div>
+          <p class="personality">Approachable · smooth · professional</p>
+          <div class="specimen font-jakarta">
+            <p class="sample-heading" data-sample>The quick brown fox jumps over the lazy dog.</p>
+            <p class="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz · 0123456789</p>
+            <div class="ui-row"><button type="button">Find a shift <span>→</span></button><span>4 spots left</span></div>
+          </div>
+          <button class="favorite" type="button" aria-pressed="false"><span>♡</span> Favorite this look</button>
+        </article>
+
+        <article class="font-card" data-font-card data-font-name="Sora">
+          <div class="card-top">
+            <div><span class="number">04</span><h2>Sora</h2></div>
+            <span class="badge badge-coral">Youthful</span>
+          </div>
+          <p class="personality">Rounded · optimistic · energetic</p>
+          <div class="specimen font-sora">
+            <p class="sample-heading" data-sample>The quick brown fox jumps over the lazy dog.</p>
+            <p class="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz · 0123456789</p>
+            <div class="ui-row"><button type="button">Find a shift <span>→</span></button><span>4 spots left</span></div>
+          </div>
+          <button class="favorite" type="button" aria-pressed="false"><span>♡</span> Favorite this look</button>
+        </article>
+
+        <article class="font-card" data-font-card data-font-name="DM Sans">
+          <div class="card-top">
+            <div><span class="number">05</span><h2>DM Sans</h2></div>
+            <span class="badge badge-neutral">Safest choice</span>
+          </div>
+          <p class="personality">Clean · neutral · familiar</p>
+          <div class="specimen font-dm">
+            <p class="sample-heading" data-sample>The quick brown fox jumps over the lazy dog.</p>
+            <p class="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz · 0123456789</p>
+            <div class="ui-row"><button type="button">Find a shift <span>→</span></button><span>4 spots left</span></div>
+          </div>
+          <button class="favorite" type="button" aria-pressed="false"><span>♡</span> Favorite this look</button>
+        </article>
+
+        <article class="font-card" data-font-card data-font-name="Fraunces + Manrope">
+          <div class="card-top">
+            <div><span class="number">06</span><h2>Fraunces + Manrope</h2></div>
+            <span class="badge badge-yellow">Editorial</span>
+          </div>
+          <p class="personality">Expressive · human · memorable</p>
+          <div class="specimen font-pair">
+            <p class="sample-heading" data-sample>The quick brown fox jumps over the lazy dog.</p>
+            <p class="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz · 0123456789</p>
+            <div class="ui-row"><button type="button">Find a shift <span>→</span></button><span>4 spots left</span></div>
+          </div>
+          <button class="favorite" type="button" aria-pressed="false"><span>♡</span> Favorite this look</button>
+        </article>
+      </section>
+
+      <section class="decision-panel" aria-live="polite">
+        <div>
+          <span class="page-label">YOUR SHORTLIST</span>
+          <h2 id="decision-title">Pick any styles you like.</h2>
+          <p id="decision-copy">Your favorites will appear here so they are easy to compare.</p>
+        </div>
+        <a href="index.html">Return to homepage <span>→</span></a>
+      </section>
+    </main>
+
+    <footer>
+      <span>CivicShift Design Lab</span>
+      <span>Font specimens load from Google Fonts for comparison only.</span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="CivicShift connects high school volunteers with nonprofit shifts, scheduling tools, and verified service hours."
+    />
+    <meta name="theme-color" content="#f6f3ea" />
+    <title>CivicShift | Turn free time into real impact</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header" data-header>
+      <nav class="nav shell" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="CivicShift home">
+          <svg class="brand-mark" viewBox="0 0 42 42" aria-hidden="true">
+            <path d="M10 22.5 20.5 7 31 22.5 20.5 35 10 22.5Z" fill="currentColor" />
+            <path d="m15.3 22.4 5.2-7.8 5.2 7.8-5.2 6.2-5.2-6.2Z" fill="#f6f3ea" />
+          </svg>
+          <span>CivicShift</span>
+        </a>
+
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+          <span class="sr-only">Toggle navigation</span>
+          <span></span><span></span>
+        </button>
+
+        <div class="nav-links" id="nav-links">
+          <a href="#opportunities">Opportunities</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#features">Features</a>
+          <button class="text-button" type="button" data-open-dialog="signin">Sign in</button>
+          <button class="button button-small button-dark" type="button" data-open-dialog="join">Get started</button>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+        <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
+
+        <div class="shell hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow"><span></span> Built for students. Trusted by nonprofits.</p>
+            <h1>Your next good deed is already on the <em>schedule.</em></h1>
+            <p class="hero-lede">
+              Discover local volunteer shifts, avoid calendar conflicts, and turn every completed hour into
+              verified impact—all in one place.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#opportunities">
+                Find a shift
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 6 6-6 6" /></svg>
+              </a>
+              <button class="button button-ghost" type="button" data-open-dialog="organizer">
+                I organize volunteers
+              </button>
+            </div>
+            <ul class="trust-list" aria-label="Key benefits">
+              <li><span aria-hidden="true">✓</span> Conflict-aware scheduling</li>
+              <li><span aria-hidden="true">✓</span> Verified service records</li>
+              <li><span aria-hidden="true">✓</span> Student-first discovery</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual" aria-label="Interactive CivicShift dashboard preview">
+            <div class="floating-tag floating-tag-top">
+              <span class="status-dot"></span>
+              <span><strong>Shift approved</strong><small>Saturday · 9:00 AM</small></span>
+            </div>
+
+            <div class="dashboard-card">
+              <div class="dashboard-topbar">
+                <div>
+                  <span class="mini-label">MY WEEK</span>
+                  <strong>October 12–18</strong>
+                </div>
+                <button class="avatar" type="button" aria-label="Open sample profile">AM</button>
+              </div>
+
+              <div class="role-switcher" role="tablist" aria-label="Preview dashboards by role">
+                <button role="tab" aria-selected="true" aria-controls="role-panel" data-role="student">Student</button>
+                <button role="tab" aria-selected="false" aria-controls="role-panel" data-role="organizer">Organizer</button>
+                <button role="tab" aria-selected="false" aria-controls="role-panel" data-role="admin">Admin</button>
+              </div>
+
+              <div class="role-panel" id="role-panel" role="tabpanel" tabindex="0">
+                <div class="metric-row">
+                  <div>
+                    <span class="metric-number" data-role-hours>42.5</span>
+                    <span class="metric-label" data-role-metric>verified hours</span>
+                  </div>
+                  <div class="ring" aria-hidden="true"><span data-role-ring>71%</span></div>
+                </div>
+
+                <div class="week-strip" aria-label="Sample weekly schedule">
+                  <div><span>MON</span><strong>12</strong></div>
+                  <div><span>TUE</span><strong>13</strong></div>
+                  <div class="day-active"><span>WED</span><strong>14</strong></div>
+                  <div><span>THU</span><strong>15</strong></div>
+                  <div><span>FRI</span><strong>16</strong></div>
+                </div>
+
+                <article class="next-shift">
+                  <div class="shift-time"><strong data-role-time>9:00</strong><span data-role-period>AM</span></div>
+                  <div class="shift-rule"></div>
+                  <div>
+                    <span class="mini-label" data-role-kicker>NEXT SHIFT</span>
+                    <h2 data-role-title>Community Garden Crew</h2>
+                    <p data-role-detail>Riverside Garden · 3 hours</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="floating-tag floating-tag-bottom">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M5 10l7-7 7 7" /></svg>
+              <span><strong>+3 verified hours</strong><small>Goal progress updated</small></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="shell impact-strip" aria-label="Platform workflow">
+          <p>One shared path from interest to impact</p>
+          <ol>
+            <li><span>01</span> Discover</li>
+            <li><span>02</span> Schedule</li>
+            <li><span>03</span> Serve</li>
+            <li><span>04</span> Verify</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="opportunities section" id="opportunities">
+        <div class="shell">
+          <div class="section-heading split-heading">
+            <div>
+              <p class="eyebrow"><span></span> Sample opportunities</p>
+              <h2>Make your open hours <em>count.</em></h2>
+            </div>
+            <p>Try the live filters to preview how students can find shifts that fit their interests and availability.</p>
+          </div>
+
+          <div class="finder" aria-label="Opportunity finder">
+            <label class="search-field" for="opportunity-search">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></svg>
+              <span class="sr-only">Search opportunities</span>
+              <input id="opportunity-search" type="search" placeholder="Search by cause, role, or location" />
+            </label>
+            <div class="filter-list" role="group" aria-label="Filter by category">
+              <button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">All causes</button>
+              <button class="filter-chip" type="button" data-filter="environment" aria-pressed="false">Environment</button>
+              <button class="filter-chip" type="button" data-filter="education" aria-pressed="false">Education</button>
+              <button class="filter-chip" type="button" data-filter="community" aria-pressed="false">Community</button>
+            </div>
+          </div>
+
+          <div class="results-meta" aria-live="polite">
+            <p><strong id="result-count">3</strong> sample shifts match your search</p>
+            <span>Sorted by relevance</span>
+          </div>
+
+          <div class="opportunity-grid">
+            <article class="opportunity-card" data-category="environment" data-search="community garden planting outdoors riverside saturday">
+              <div class="card-art art-garden" aria-hidden="true">
+                <span class="art-sun"></span><span class="art-hill"></span><span class="art-sprout">✦</span>
+                <span class="date-tile"><strong>17</strong><small>OCT</small></span>
+              </div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category-tag">Environment</span><span>3 hours</span></div>
+                <h3>Community Garden Crew</h3>
+                <p>Plant fall seedlings and prepare shared garden beds for neighborhood families.</p>
+                <ul class="detail-list">
+                  <li><span aria-hidden="true">⌖</span> Riverside · In person</li>
+                  <li><span aria-hidden="true">◷</span> Saturday, 9:00 AM–12:00 PM</li>
+                </ul>
+                <div class="capacity"><span><strong>4</strong> spots left</span><span>8 / 12 filled</span></div>
+                <div class="progress" aria-label="8 of 12 spots filled"><span style="width:66.67%"></span></div>
+                <div class="card-actions">
+                  <button class="button button-card" type="button" data-view-shift="Community Garden Crew">View shift</button>
+                  <button class="save-button" type="button" aria-label="Save Community Garden Crew" aria-pressed="false"><span>♡</span></button>
+                </div>
+              </div>
+            </article>
+
+            <article class="opportunity-card" data-category="education" data-search="math tutoring homework library education weekday">
+              <div class="card-art art-tutoring" aria-hidden="true">
+                <span class="book book-one"></span><span class="book book-two"></span><span class="book-star">✦</span>
+                <span class="date-tile"><strong>21</strong><small>OCT</small></span>
+              </div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category-tag">Education</span><span>2 hours</span></div>
+                <h3>After-School Math Lab</h3>
+                <p>Support middle school students with homework in a welcoming, team-based study session.</p>
+                <ul class="detail-list">
+                  <li><span aria-hidden="true">⌖</span> Central Library · In person</li>
+                  <li><span aria-hidden="true">◷</span> Wednesday, 3:30–5:30 PM</li>
+                </ul>
+                <div class="capacity"><span><strong>2</strong> spots left</span><span>6 / 8 filled</span></div>
+                <div class="progress" aria-label="6 of 8 spots filled"><span style="width:75%"></span></div>
+                <div class="card-actions">
+                  <button class="button button-card" type="button" data-view-shift="After-School Math Lab">View shift</button>
+                  <button class="save-button" type="button" aria-label="Save After-School Math Lab" aria-pressed="false"><span>♡</span></button>
+                </div>
+              </div>
+            </article>
+
+            <article class="opportunity-card" data-category="community" data-search="food pantry packing boxes community downtown sunday">
+              <div class="card-art art-pantry" aria-hidden="true">
+                <span class="box-shape"></span><span class="heart-shape">♥</span><span class="tape-shape"></span>
+                <span class="date-tile"><strong>25</strong><small>OCT</small></span>
+              </div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category-tag">Community</span><span>2.5 hours</span></div>
+                <h3>Pantry Packing Team</h3>
+                <p>Sort donations and assemble weekly grocery boxes for local households.</p>
+                <ul class="detail-list">
+                  <li><span aria-hidden="true">⌖</span> Downtown Hub · In person</li>
+                  <li><span aria-hidden="true">◷</span> Sunday, 10:00 AM–12:30 PM</li>
+                </ul>
+                <div class="capacity"><span><strong>7</strong> spots left</span><span>9 / 16 filled</span></div>
+                <div class="progress" aria-label="9 of 16 spots filled"><span style="width:56.25%"></span></div>
+                <div class="card-actions">
+                  <button class="button button-card" type="button" data-view-shift="Pantry Packing Team">View shift</button>
+                  <button class="save-button" type="button" aria-label="Save Pantry Packing Team" aria-pressed="false"><span>♡</span></button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="empty-state" hidden>
+            <span aria-hidden="true">⌕</span>
+            <h3>No shifts found</h3>
+            <p>Try another keyword or select “All causes.”</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="roles section" id="how-it-works">
+        <div class="shell roles-grid">
+          <div class="roles-copy">
+            <p class="eyebrow eyebrow-light"><span></span> One coordinated community</p>
+            <h2>Everyone gets the right view.</h2>
+            <p>
+              CivicShift keeps each role focused. Students find the right fit, organizers fill every shift, and admins protect the whole community.
+            </p>
+            <div class="role-steps">
+              <article>
+                <span>01</span>
+                <div><h3>Students</h3><p>Match with opportunities, protect your schedule, and build a verified service record.</p></div>
+              </article>
+              <article>
+                <span>02</span>
+                <div><h3>Organizers</h3><p>Create shifts, approve volunteers, spot staffing gaps, and confirm attendance.</p></div>
+              </article>
+              <article>
+                <span>03</span>
+                <div><h3>Admins</h3><p>Approve organizations, review activity, and keep permissions and records accountable.</p></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="schedule-visual" aria-label="Illustration of conflict-aware shift scheduling">
+            <div class="schedule-header"><span>SHIFT BUILDER</span><strong>Saturday, October 17</strong></div>
+            <div class="schedule-row">
+              <span>8 AM</span><div class="schedule-block block-blue"><strong>Set-up crew</strong><small>5 / 6 volunteers</small></div>
+            </div>
+            <div class="schedule-row">
+              <span>10 AM</span><div class="schedule-block block-coral"><strong>Garden crew</strong><small>8 / 12 volunteers</small></div>
+            </div>
+            <div class="schedule-row">
+              <span>12 PM</span><div class="schedule-gap"><span>4 open spots</span><button type="button" data-open-dialog="coverage">Find a match</button></div>
+            </div>
+            <div class="schedule-row">
+              <span>2 PM</span><div class="schedule-block block-yellow"><strong>Clean-up crew</strong><small>3 / 5 volunteers</small></div>
+            </div>
+            <div class="conflict-note"><span>✓</span><div><strong>No conflicts detected</strong><small>All approved volunteers are available.</small></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features section" id="features">
+        <div class="shell">
+          <div class="section-heading centered-heading">
+            <p class="eyebrow"><span></span> Designed around the whole journey</p>
+            <h2>Less coordination.<br /><em>More contribution.</em></h2>
+          </div>
+
+          <div class="bento-grid">
+            <article class="feature-card feature-large">
+              <div class="feature-icon" aria-hidden="true">↗</div>
+              <span class="mini-label">SMART MATCHING</span>
+              <h3>Shifts that fit the student—not just the calendar.</h3>
+              <p>Recommendations bring together interests, skills, availability, and location so discovery starts with a better match.</p>
+              <div class="match-demo" aria-hidden="true">
+                <span>YOUR MATCH</span><strong>94%</strong>
+                <div><i style="width:94%"></i></div>
+                <small>Environment · Saturday · 3 mi away</small>
+              </div>
+            </article>
+
+            <article class="feature-card feature-calendar">
+              <div class="feature-icon" aria-hidden="true">⌁</div>
+              <span class="mini-label">CONFLICT GUARD</span>
+              <h3>One student. One schedule. Zero double-booking.</h3>
+              <div class="mini-calendar" aria-label="Calendar showing a protected schedule">
+                <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+                <i>12</i><i>13</i><i>14</i><i>15</i><i>16</i><i class="selected">17</i><i>18</i>
+              </div>
+            </article>
+
+            <article class="feature-card feature-hours">
+              <div class="feature-icon" aria-hidden="true">✓</div>
+              <span class="mini-label">VERIFIED HOURS</span>
+              <h3>Proof that moves with you.</h3>
+              <p>Track pending and approved time, then export a clean service record for schools and scholarships.</p>
+              <div class="hours-ticket">
+                <span>TOTAL VERIFIED</span><strong>42.5 <small>HRS</small></strong><div>Goal: 60 hours</div>
+              </div>
+            </article>
+
+            <article class="feature-card feature-alerts">
+              <div class="feature-icon" aria-hidden="true">!</div>
+              <span class="mini-label">TIMELY UPDATES</span>
+              <h3>Know what changed before it becomes a scramble.</h3>
+              <ul>
+                <li><span class="notification-icon">✓</span><div><strong>Hours verified</strong><small>Just now</small></div></li>
+                <li><span class="notification-icon">↻</span><div><strong>Waitlist spot opened</strong><small>8 minutes ago</small></div></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="verification section">
+        <div class="shell verification-grid">
+          <div>
+            <p class="eyebrow"><span></span> A trustworthy record</p>
+            <h2>From sign-up to signed off.</h2>
+            <p class="verification-copy">Every status is clear, every change is traceable, and every verified hour has an organizer behind it.</p>
+          </div>
+          <ol class="status-flow" aria-label="Volunteer shift status progression">
+            <li class="is-complete"><span>✓</span><div><strong>Requested</strong><small>Oct 2 · 4:18 PM</small></div></li>
+            <li class="is-complete"><span>✓</span><div><strong>Approved</strong><small>Oct 3 · 9:12 AM</small></div></li>
+            <li class="is-complete"><span>✓</span><div><strong>Attended</strong><small>Oct 17 · 12:04 PM</small></div></li>
+            <li class="is-current"><span>4</span><div><strong>Hours verified</strong><small>Organizer confirmed 3.0 hours</small></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="final-cta">
+        <div class="shell cta-inner">
+          <div>
+            <p class="eyebrow eyebrow-light"><span></span> Your community has a place for you</p>
+            <h2>Find the shift that starts your ripple.</h2>
+          </div>
+          <button class="button button-light" type="button" data-open-dialog="join">Create a free profile <span>→</span></button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand brand-footer" href="#top">
+            <svg class="brand-mark" viewBox="0 0 42 42" aria-hidden="true"><path d="M10 22.5 20.5 7 31 22.5 20.5 35 10 22.5Z" fill="currentColor" /><path d="m15.3 22.4 5.2-7.8 5.2 7.8-5.2 6.2-5.2-6.2Z" fill="#101d42" /></svg>
+            <span>CivicShift</span>
+          </a>
+          <p>Volunteer coordination built around students, nonprofits, and verified community impact.</p>
+        </div>
+        <div>
+          <h2>Explore</h2><a href="#opportunities">Opportunities</a><a href="#how-it-works">How it works</a><a href="#features">Features</a>
+        </div>
+        <div>
+          <h2>For teams</h2><button type="button" data-open-dialog="organizer">Organizers</button><button type="button" data-open-dialog="admin">Admins</button><button type="button" data-open-dialog="coverage">Shift coverage</button>
+        </div>
+        <div>
+          <h2>Accessibility</h2><p>Keyboard-friendly navigation, visible focus states, readable contrast, and responsive layouts are built in.</p>
+        </div>
+      </div>
+      <div class="shell footer-bottom"><span>© 2026 CivicShift. Student competition project.</span><span>All opportunities shown are fictional demos.</span></div>
+    </footer>
+
+    <dialog class="site-dialog" aria-labelledby="dialog-title">
+      <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+      <span class="dialog-icon" aria-hidden="true">✦</span>
+      <p class="mini-label" id="dialog-kicker">CIVICSHIFT PREVIEW</p>
+      <h2 id="dialog-title">Ready to make an impact?</h2>
+      <p id="dialog-copy">Choose the role that best fits you. Account creation will be connected in the next build phase.</p>
+      <div class="dialog-options">
+        <button type="button" data-demo-role="Student volunteer"><span>Student volunteer</span><small>Find and track service</small></button>
+        <button type="button" data-demo-role="Nonprofit organizer"><span>Nonprofit organizer</span><small>Create and staff shifts</small></button>
+        <button type="button" data-demo-role="Administrator"><span>Administrator</span><small>Keep the community safe</small></button>
+      </div>
+      <p class="dialog-message" aria-live="polite"></p>
+    </dialog>
+
+    <div class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  </body>
+</html>

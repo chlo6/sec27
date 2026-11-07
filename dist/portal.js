@@ -84,6 +84,13 @@ function openSpots(event) { return event.shifts.reduce((sum, shift) => sum + Mat
 function totalCapacity(event) { return event.shifts.reduce((sum, shift) => sum + shift.capacity, 0); }
 function totalFilled(event) { return event.shifts.reduce((sum, shift) => sum + shift.filled, 0); }
 function unreadCount(role = state.role) { return state.notifications.filter((item) => item.role === role && !item.read).length; }
+function notificationPreview() {
+  const items = state.notifications.filter((item) => item.role === state.role).slice(0, 3);
+  return `<div class="notification-preview" aria-label="Notification preview">
+    <div class="notification-preview-head"><strong>Notifications</strong><a href="#/notifications">View all</a></div>
+    <div class="notification-preview-list">${items.length ? items.map((item) => `<a class="notification-preview-item ${item.read ? "" : "unread"}" href="${esc(item.link || "#/notifications")}"><span class="notification-preview-icon">${item.type === "success" ? "✓" : item.type === "warning" ? "!" : "i"}</span><span><strong>${esc(item.title)}</strong><small>${esc(item.body)}</small><time>${esc(item.time)}</time></span></a>`).join("") : `<p>No notifications yet.</p>`}</div>
+  </div>`;
+}
 
 const NAV = {
   student: [
@@ -135,7 +142,6 @@ function shell(content, route, title) {
         <nav class="side-nav">${navMarkup(route)}</nav>
         <div class="sidebar-footer">
           <a href="#/about"><span>◎</span> About this project</a>
-          <button type="button" data-action="toggle-dark"><span>◐</span> ${state.settings.dark ? "Light mode" : "Dark mode"}</button>
           <a href="#/account"><span>⇄</span> Demo accounts</a>
         </div>
       </aside>
@@ -147,7 +153,12 @@ function shell(content, route, title) {
             <select class="role-switch" id="role-switch" data-role-switch>
               ${Object.entries(ROLE_LABELS).map(([value,label]) => `<option value="${value}" ${value === state.role ? "selected" : ""}>${esc(label)}</option>`).join("")}
             </select>
-            <a class="icon-button notification-button" href="#/notifications" aria-label="Notifications">♢${unreadCount() ? "<i></i>" : ""}</a>
+            <div class="notification-menu">
+              <a class="icon-button notification-button" href="#/notifications" aria-label="Notifications${unreadCount() ? `, ${unreadCount()} unread` : ""}">♢${unreadCount() ? `<span class="notification-count">${unreadCount()}</span>` : ""}</a>
+              ${notificationPreview()}
+            </div>
+            <button class="theme-switch" type="button" data-action="toggle-dark" aria-label="Switch to ${state.settings.dark ? "light" : "dark"} mode" title="Switch to ${state.settings.dark ? "light" : "dark"} mode"><span aria-hidden="true">${state.settings.dark ? "☀" : "☾"}</span><strong>${state.settings.dark ? "Light" : "Dark"}</strong></button>
+            <a class="topbar-login" href="#/login">Log in</a>
           </div>
         </header>
         <main class="workspace" id="workspace" tabindex="-1">${content}</main>
@@ -447,11 +458,16 @@ function accountView() {
   return `<div class="account-wrap"><section class="account-art"><a class="brand" href="index.html"><svg viewBox="0 0 42 42" aria-hidden="true"><path d="M10 22.5 20.5 7 31 22.5 20.5 35 10 22.5Z" fill="currentColor"/><path d="m15.3 22.4 5.2-7.8 5.2 7.8-5.2 6.2-5.2-6.2Z" fill="#315ae8"/></svg>CivicShift</a><div><h1>Demo accounts</h1><p>Choose a role or create a browser-local demo profile. No real password is stored or transmitted.</p></div><small>Demo data can be reset from the About page.</small></section><section class="account-panel"><div class="account-card"><div class="tabs"><button class="active" type="button">Quick role access</button></div><h2>Choose a dashboard</h2><p style="color:var(--soft);font-size:.72rem">Each role has different navigation, data, and permissions.</p><div class="demo-role-grid">${Object.entries(ROLE_LABELS).map(([role,label])=>`<button class="demo-role" data-action="demo-role" data-role="${role}"><strong>${esc(label)}</strong><small>${role==="student"?"Discover, schedule, and track hours":role==="organizer"?"Create events and manage volunteers":role==="admin"?"Review safety and platform access":"View school-verified student hours"}</small></button>`).join("")}</div><div class="form-section" style="margin-top:22px"><h3>Create a browser-local demo account</h3><form data-form="account"><div class="form-grid"><div class="field"><label for="account-name">Name</label><input id="account-name" name="name" required maxlength="60"></div><div class="field"><label for="account-email">Email</label><input id="account-email" name="email" type="email" required></div><div class="field span-2"><label for="account-role">Role</label><select id="account-role" name="role"><option value="student">Student Volunteer</option><option value="organizer">Nonprofit Organizer</option><option value="counselor">School Counselor / Teacher</option></select></div></div><button class="button button-primary" type="submit" style="margin-top:12px;width:100%">Create demo profile</button></form></div></div></section></div>`;
 }
 
+function loginView() {
+  return `<div class="account-wrap"><section class="account-art"><a class="brand" href="index.html"><svg viewBox="0 0 42 42" aria-hidden="true"><path d="M10 22.5 20.5 7 31 22.5 20.5 35 10 22.5Z" fill="currentColor"/><path d="m15.3 22.4 5.2-7.8 5.2 7.8-5.2 6.2-5.2-6.2Z" fill="#315ae8"/></svg>CivicShift</a><div><h1>Log in</h1><p>Open a saved demo account to view its dashboard, events, and service records.</p></div><small>This prototype stores demo sessions in your browser.</small></section><section class="account-panel"><div class="account-card login-card"><h2>Welcome back</h2><p class="login-intro">Enter one of the demo emails below. Any password works in this browser-only prototype.</p><form data-form="login"><div class="field"><label for="login-email">Email</label><input id="login-email" name="email" type="email" autocomplete="email" placeholder="maya@demo.civicshift.org" required></div><div class="field" style="margin-top:12px"><label for="login-password">Password</label><input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter any demo password" required minlength="4"></div><button class="button button-primary login-submit" type="submit">Log in</button></form><div class="login-divider"><span>Demo accounts</span></div><div class="demo-login-list"><button type="button" data-action="fill-login" data-email="maya@demo.civicshift.org"><strong>Student</strong><span>maya@demo.civicshift.org</span></button><button type="button" data-action="fill-login" data-email="nina@greenway.demo"><strong>Organizer</strong><span>nina@greenway.demo</span></button><button type="button" data-action="fill-login" data-email="avery@civicshift.demo"><strong>Admin</strong><span>avery@civicshift.demo</span></button><button type="button" data-action="fill-login" data-email="lmorris@roosevelt.demo"><strong>Counselor</strong><span>lmorris@roosevelt.demo</span></button></div><a class="login-account-link" href="#/account">Create or switch demo accounts</a></div></section></div>`;
+}
+
 function render() {
   const { route, id, subId }=routeInfo();
   document.body.classList.toggle("dark",Boolean(state.settings.dark));
   if(route==="account") { app.innerHTML=accountView(); document.title="Demo Accounts | CivicShift"; return; }
-  const allowed=new Set(NAV[state.role].map((item)=>item[1]).concat(["event","about","account"]));
+  if(route==="login") { app.innerHTML=loginView(); document.title="Log in | CivicShift"; return; }
+  const allowed=new Set(NAV[state.role].map((item)=>item[1]).concat(["event","about","account","login"]));
   const safeRoute=allowed.has(route)?route:"dashboard";
   let content="",title="Dashboard";
   const views={ dashboard:()=>dashboardView(), explore:()=>exploreView(), event:()=>eventDetailView(id), calendar:()=>calendarView(), hours:()=>hoursView(), portfolio:()=>portfolioView(), profile:()=>profileView(), events:()=>eventsView(id,subId), approvals:()=>approvalsView(), roster:()=>rosterView(), communications:()=>communicationsView(), notifications:()=>notificationsView(), reports:()=>reportsView(), people:()=>peopleView(), safety:()=>safetyView(), activity:()=>activityView(), students:()=>studentsView(), help:()=>helpView(), about:()=>aboutView() };
@@ -485,6 +501,7 @@ document.addEventListener("click",(event)=>{
   const action=target.dataset.action;
   if(action==="toggle-sidebar") document.querySelector(".sidebar")?.classList.toggle("open");
   if(action==="toggle-dark") { state.settings.dark=!state.settings.dark; saveState(); render(); }
+  if(action==="fill-login") { const email=document.querySelector("#login-email"),password=document.querySelector("#login-password");if(email&&password){email.value=target.dataset.email;password.value="demo";password.focus();} }
   if(action==="set-view") { ui.view=target.dataset.view; render(); }
   if(action==="notification-filter") { ui.notificationFilter=target.dataset.filter; render(); }
   if(action==="save-event") { const id=target.dataset.event; state.saved=state.saved.includes(id)?state.saved.filter((item)=>item!==id):[...state.saved,id]; saveState(); showToast(state.saved.includes(id)?"Opportunity saved.":"Removed from saved opportunities."); render(); }
@@ -534,6 +551,7 @@ document.addEventListener("submit",(event)=>{
   if(kind==="message"){const eventItem=getEvent(String(data.get("eventId"))),user=currentUser();state.messages.push({id:uid("msg"),eventId:eventItem.id,authorRole:user.role,author:user.role==="student"?`${user.name.split(" ")[0]} ${user.name.split(" ")[1][0]}.`:user.name,body:String(data.get("body")).trim(),time:"Just now"});saveState();render();showToast("Question posted publicly to the event channel.");}
   if(kind==="notification-settings"){state.settings.digest=String(data.get("digest"));state.settings.email=data.has("email");state.settings.sms=data.has("sms");saveState();showToast("Notification preferences saved.");}
   if(kind==="account"){const role=String(data.get("role")),name=String(data.get("name")).trim(),email=String(data.get("email")).trim();const id=uid(role);const user={id,role,name,email,avatar:name.split(" ").map((p)=>p[0]).join("").slice(0,2).toUpperCase()};if(role==="student")Object.assign(user,{school:"Not selected",grade:9,birthDate:"2011-01-01",interests:[],skills:[],availability:[],location:"",verifiedHours:0,pendingHours:0,requirementGoal:40,requirementName:"School service goal",guardianConsent:false,emergencyContact:"",privacy:"private",leaderboardOptIn:false});if(role==="organizer")Object.assign(user,{nonprofitName:"New nonprofit",description:"",contact:email,verified:false,backgroundChecked:false});if(role==="counselor")Object.assign(user,{school:"Not selected",title:"Counselor / Teacher",readOnly:true});state.users.push(user);state.activeUser[role]=id;state.role=role;saveState();location.hash="#/profile";render();showToast("Browser-local demo profile created.");}
+  if(kind==="login"){const email=String(data.get("email")).trim().toLowerCase();const user=state.users.find((item)=>String(item.email||"").toLowerCase()===email);if(!user){showToast("That email is not one of the demo accounts.");return;}state.role=user.role;state.activeUser[user.role]=user.id;saveState();location.hash="#/dashboard";render();showToast(`Logged in as ${user.name}.`);}
 });
 
 function handleEventForm(data) {

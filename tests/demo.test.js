@@ -16,7 +16,7 @@ test('v4 migration is additive, persistent, idempotent, and preserves edited and
  legacy.events=legacy.events.filter(e=>!e.id.startsWith('evt-creek')&&!['evt-books','evt-market','evt-repair'].includes(e.id));
  legacy.events[0].title='Saved custom title';legacy.users[0].location='My town';legacy.signups.push({id:'custom',studentId:'stu-1',eventId:'evt-tech',shiftId:'sh-tech',status:'waitlist'});
  const storage=memory();storage.setItem('civicshift-demo-v4',JSON.stringify(legacy));const s=loadState(storage);
- assert.equal(s.version,5);assert.equal(s.events[0].title,'Saved custom title');assert.equal(s.users[0].location,'My town');assert.ok(s.signups.some(r=>r.id==='custom'));
+ assert.equal(s.version,6);assert.equal(s.events[0].title,'Saved custom title');assert.equal(s.users[0].location,'My town');assert.ok(s.signups.some(r=>r.id==='custom'));
  persistState(s,storage);assert.deepEqual(loadState(storage),s);assert.deepEqual(migrateState(s),s);assert.ok(storage.getItem('civicshift-demo-v4'));assert.ok(storage.getItem(STORAGE_KEY));
 });
 test('unreadable storage is not silently overwritten; reset seed independent',()=>{

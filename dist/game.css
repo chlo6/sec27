@@ -1,0 +1,71 @@
+/* CivicShift game progression uses the existing palette and typography. */
+.game-section,.week-card,.scoring-rules { margin-top:20px; }
+.game-metrics,.game-progress-layout { display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px; }
+.game-progress-layout { margin-top:20px;align-items:start; }
+.reputation-card { background:var(--blue-soft);border-color:#cbd6ff; }
+.reputation-card .goal-number strong { color:var(--blue); }
+.hours-card { background:var(--paper); }
+.game-metrics p,.game-section p,.school-goal p,.scoring-rules p,.reputation-card p,.code-card p { font-size:.78rem;line-height:1.65;color:var(--soft); }
+.game-metrics a,.reputation-card a { font-size:.75rem;font-weight:800; }
+.quest-list { display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px; }
+.quest { display:flex;align-items:flex-start;gap:12px;border:1px solid var(--line);padding:16px;border-radius:14px;background:var(--surface,#fff); }
+.quest>div { min-width:0;flex:1; }
+.quest h3 { margin:0;font-size:.85rem; }
+.quest p { font-size:.7rem;line-height:1.5;margin:5px 0 12px;color:var(--soft); }
+.quest small { display:block;margin-top:7px;font-size:.68rem;color:var(--soft); }
+.quest-mark { background:var(--blue-soft);color:var(--blue);border-radius:50%;width:30px;height:30px;flex:0 0 30px;display:grid;place-items:center;font-weight:800; }
+.quest.earned { border-color:#c3d0ff;background:var(--blue-soft); }
+.quest.earned .quest-mark { background:var(--blue-button);color:#ffffff; }
+.quest-list.compact { grid-template-columns:1fr;gap:8px; }
+.compact .quest { padding:10px; }
+.compact .quest p { display:none; }
+.compact .quest .progress { margin-top:8px; }
+.school-goal .goal-number { margin-top:18px; }
+.school-goal h2 { margin-top:8px; }
+.week-grid { display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px; }
+.week-day { border:1px solid var(--line);border-radius:12px;padding:12px 9px;min-height:115px; }
+.week-day time { display:block;font-size:.67rem;font-weight:800;margin-bottom:10px; }
+.week-day a { display:block;background:var(--blue-soft);padding:9px;border-radius:8px;margin-bottom:8px;overflow-wrap:anywhere; }
+.week-day strong { display:block;font-size:.69rem;line-height:1.45; }
+.week-day small,.week-empty { display:block;color:var(--soft);font-size:.62rem;margin-top:6px; }
+.point-rules { display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0; }
+.point-rules>div { padding:15px;border:1px solid var(--line);border-radius:12px; }
+.point-rules strong { display:block;font-size:1.5rem; }
+.point-rules span { display:block;font-size:.73rem;margin-top:5px;line-height:1.5; }
+.game-empty { padding:20px 0;color:var(--soft);font-size:.8rem;line-height:1.65; }
+.rank-token { display:inline-grid;place-items:center;width:34px;height:34px;background:var(--blue-soft);border-radius:50%;font-weight:800; }
+.student-shift-tools { border-top:1px solid var(--line);padding-top:12px;margin-top:12px; }
+.student-shift-tools>small { display:block;font-size:.65rem;color:var(--soft);margin-top:8px; }
+.code-entry { display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap; }
+.code-entry input { max-width:180px;letter-spacing:.2em;font-size:1rem; }
+.code-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px; }
+.code-card { border:1px solid var(--line);padding:18px;border-radius:14px; }
+.attendance-code { display:block;letter-spacing:.2em;font-size:1.8rem;font-weight:800;color:var(--blue);padding:10px 0; }
+.assessment { border-top:1px solid var(--line);padding:15px 0; }
+.assessment summary { cursor:pointer;font-size:.8rem;font-weight:800;line-height:1.8; }
+.assessment form { margin-top:15px;display:grid;gap:10px; }
+.assessment .check-card { margin:0; }
+.record-correction { background:var(--blue-soft);border-radius:12px;padding:16px; }
+.game-profile-extra { margin-top:20px; }
+.demo-login-personas { display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0; }
+.demo-login-personas button { text-align:left; }
+.case-study-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px; }
+.case-study-grid p { font-size:.8rem;line-height:1.7;color:var(--soft); }
+body.dark .reputation-card { background:#19223b;border-color:#34466d; }
+body.dark .reputation-card .goal-number strong { color:#a9beff; }
+body.dark .quest { background:var(--paper,#171719); }
+body.dark .quest.earned { background:#19223b;border-color:#34466d; }
+@media (max-width:1050px) { .week-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }.game-progress-layout .quest-list { grid-template-columns:1fr; } }
+@media (max-width:700px) { .game-metrics,.game-progress-layout,.case-study-grid { grid-template-columns:1fr; }.week-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }.quest-list,.point-rules { grid-template-columns:1fr 1fr; }.point-rules>div { padding:12px; }.game-section .button { white-space:normal; }.demo-login-personas { grid-template-columns:1fr; } }
+@media (max-width:420px) { .quest-list { grid-template-columns:1fr; }.code-grid { grid-template-columns:minmax(0,1fr); } }
+@media (prefers-reduced-motion:reduce) { .quest,.rank-token,.progress span { animation:none!important;transition:none!important; } }
+.filter-bar { grid-template-columns:minmax(170px,1.6fr) repeat(5,minmax(100px,1fr)) auto; }
+.primary-links { gap:18px; }
+.feed-layout { margin-top:20px; }
+.game-progress-layout>article:last-child:nth-child(3) { grid-column:1/-1; }
+@media (max-width:1200px) { .filter-bar { grid-template-columns:repeat(3,minmax(0,1fr)); }.filter-bar>* { grid-row:auto!important; }.community-nav { flex-wrap:wrap; }.primary-links { order:3;width:100%;justify-content:center;flex-wrap:wrap; }.community-nav>.button { margin-left:auto; } }
+@media (max-width:700px) { .filter-bar { grid-template-columns:1fr; }.primary-links { justify-content:flex-start;gap:10px 20px;font-size:11px; }.feed-aside { display:flex;flex-direction:column; }.game-progress-layout>article:last-child:nth-child(3) { grid-column:auto; } }
+
+.goal-number span { color:var(--soft); }
+.service-card .goal-number span { color:#d5d5dd; }
+.rank-token { color:var(--blue); }

@@ -1,10 +1,24 @@
 import { actorFor, recommendations, verifiedHours, commitmentConflicts } from "./domain.js";
+import { reputationPoints, quests, schoolTeam } from "./game.js";
 import { escapeHTML as x } from "./community.js";
 
 export function interpretRequest(state, input) {
   const text = input.toLowerCase().trim(), user = actorFor(state);
   if (user?.role !== "student") return {text:"Matching and registration tools use the student account. Switch to Student Volunteer to try them. Organizers and admins can use Approvals and the roster to manage service."};
   const matches = recommendations(state,user);
+  if (/\b(reputation|points?|scor(e|ing))\b/.test(text)) {
+    return {text:`You have ${reputationPoints(state,user.id)} reputation points. Earn 10 for an organizer-confirmed, verified completed shift, 2 more for confirming readiness before it starts, and 3 for organizer-confirmed task completion. An admin-reviewed unexcused absence deducts 5. Hours, email opens, reviews, and quests do not directly award points. Reputation is earned reliability and contribution; it also grows with participation. See Progress for the private ledger and absence review options.`};
+  }
+  if (/\b(quests?|badges?|achievements?)\b/.test(text)) {
+    return {text:`Your quests: ${quests(state,user.id).map(q=>`${q.title}: ${Math.min(q.current,q.target)} / ${q.target}${q.complete?' (badge earned)':''}`).join('; ')}. Badges add no reputation points. Quest progress follows verified evidence and updates after corrections.`};
+  }
+  if (/\b(team|school goal)\b/.test(text)) {
+    const team=schoolTeam(state,user.id);
+    return {text:`Your school team is ${team.school}. ${team.hours.toFixed(2)} / ${team.goal} verified hours this week (${team.start} to ${team.end}). ${team.optedIn?'You are participating.':'You can opt in from your profile.'} Only participating students' verified service dated this week contributes. Team totals do not change individual reputation.`};
+  }
+  if (/\b(check[ -]?in|attendance|code|ready|readiness)\b/.test(text)) {
+    return {text:"Before your approved shift starts, confirm readiness on its event page. At the shift, enter the organizer's six-digit demo code there; it expires after ten demo-clock minutes or at shift end. Five failed attempts block that code session. Organizers can also check you in manually. Checkout creates pending hours; organizer verification and completion confirmation are still required. A shared code cannot prove attendance or prevent sharing. I cannot generate a code, check you in, or verify hours."};
+  }
   if (/\b(hours?|goal|remaining)\b/.test(text)) {
     const hours=verifiedHours(state,user.id), pending=state.hours.filter(h=>h.studentId===user.id&&h.status==="pending").reduce((n,h)=>n+Number(h.hours),0);
     return {text:`You have ${hours.toFixed(2)} verified hours toward your ${user.requirementGoal}-hour goal. ${Math.max(0,user.requirementGoal-hours).toFixed(2)} hours remain. ${pending.toFixed(2)} pending hours are excluded until verification.`};
@@ -24,13 +38,13 @@ export function interpretRequest(state, input) {
     const eligible=matches.filter(m=>!m.blocked && (!keyword || new Date(m.event.date+"T12:00:00").toLocaleDateString("en-US",{weekday:"long"}).toLowerCase()===keyword));
     return {text:eligible.length?"Here are eligible shifts, ordered by interests, location, and saved availability. Reasons explain the order; there are no confidence scores. Review a signup before confirming.":"No eligible shifts matched. Check your profile, demo consent, calendar availability, or existing commitments.", matches:eligible.slice(0,4)};
   }
-  return {text:"I support finding shifts, explaining matches, checking conflicts, showing remaining hours, and proposing signup or cancellation. Try “Find Saturday shifts” or “How many hours remain?” I use scripted rules over local demo data; I cannot browse news, contact anyone, or monitor in the background."};
+  return {text:"I support finding shifts, explaining matches, checking conflicts, showing remaining hours, explaining reputation, quests, school goals and attendance, and proposing signup or cancellation. Try “Find Saturday shifts” or “Explain reputation.” I use scripted rules over local demo data; I cannot browse news, contact anyone, or monitor in the background."};
 }
 
 export function installAssistant({getState, runAction}) {
   const drawer=document.createElement("dialog");
   drawer.className="assistant-drawer"; drawer.setAttribute("aria-labelledby","assistant-title");
-  drawer.innerHTML=`<header><div><span class="eyebrow">A LITTLE GUIDANCE</span><h2 id="assistant-title">✦ Demo assistant</h2></div><button class="icon-button" type="button" data-close-assistant aria-label="Close demo assistant">×</button></header><p class="assistant-disclosure">Scripted tools · Local demo data · No live AI or background monitoring.</p><div class="assistant-log" role="log" aria-label="Conversation" aria-live="polite"></div><div class="assistant-suggestions">${["Find shifts","Explain matches","Check conflicts","Hours remaining","Cancel a signup"].map(p=>`<button type="button" data-prompt="${p}">${p}</button>`).join("")}</div><form class="assistant-input"><label for="assistant-input">Ask about your service</label><div><input id="assistant-input" autocomplete="off" maxlength="300" placeholder="Find Saturday shifts…" required><button class="button button-primary" type="submit">Send</button></div></form>`;
+  drawer.innerHTML=`<header><div><span class="eyebrow">A LITTLE GUIDANCE</span><h2 id="assistant-title">✦ Demo assistant</h2></div><button class="icon-button" type="button" data-close-assistant aria-label="Close demo assistant">×</button></header><p class="assistant-disclosure">Scripted tools · Local demo data · No live AI or background monitoring.</p><div class="assistant-log" role="log" aria-label="Conversation" aria-live="polite"></div><div class="assistant-suggestions">${["Find shifts","Explain matches","Check conflicts","Hours remaining","My reputation","My quests","School team","How to check in","Cancel a signup"].map(p=>`<button type="button" data-prompt="${p}">${p}</button>`).join("")}</div><form class="assistant-input"><label for="assistant-input">Ask about your service</label><div><input id="assistant-input" autocomplete="off" maxlength="300" placeholder="Find Saturday shifts…" required><button class="button button-primary" type="submit">Send</button></div></form>`;
   document.body.append(drawer);
   const log=drawer.querySelector(".assistant-log"), input=drawer.querySelector("input");
   let proposal=null, opener=null, persona=null;

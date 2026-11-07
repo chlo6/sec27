@@ -1,7 +1,8 @@
 import { DEMO_ACTIVITY, DEMO_EVENTS, DEMO_HOURS, DEMO_MESSAGES, DEMO_NOTIFICATIONS, DEMO_SIGNUPS, DEMO_USERS } from "./data.js";
 import { EXTRA_EVENTS, STORIES } from "./community-data.js";
+import { evaluateGame } from "./game.js";
 const clone = value => JSON.parse(JSON.stringify(value));
-export const STORAGE_KEY = "civicshift-demo-v5";
+export const STORAGE_KEY = "civicshift-demo-v6";
 export const INITIAL_CLOCK = "2026-10-10T08:00";
 function legacySeed() {
   return {
@@ -65,7 +66,20 @@ export function migrateState(saved) {
     const matches = state.signups.filter(s => s.eventId === hour.eventId && s.studentId === hour.studentId && s.checkOut);
     if (!hour.signupId && matches.length === 1) { hour.signupId = matches[0].id; hour.shiftId = matches[0].shiftId; }
   }
-  state.version = 5;
+  for (const key of ["reputation", "assessments", "absences", "readiness", "codeSessions", "reminderKeys"]) {
+    if (!Array.isArray(state[key])) state[key] = [];
+  }
+  for (const [index, user] of state.users.entries()) {
+    user.notificationSettings = {inApp:true,email:state.settings.email,sms:state.settings.sms,digest:state.settings.digest,...user.notificationSettings};
+    if (user.role !== "student") continue;
+    user.languages ??= [];
+    user.leaderboardAlias ??= `Volunteer ${index+1}`;
+    user.teamOptIn ??= false;
+    user.leaderboardOptIn ??= false;
+  }
+  for (const event of state.events) event.languages ??= event.requiredSkills.includes("Spanish") ? ["English", "Spanish"] : ["English"];
+  state.version = 6;
+  evaluateGame(state);
   return state;
 }
 export function seedState() {
@@ -74,11 +88,11 @@ export function seedState() {
   return migrateState(fresh);
 }
 export function loadState(storage = localStorage) {
-  const raw = storage.getItem(STORAGE_KEY) ?? storage.getItem("civicshift-demo-v4");
+  const raw = storage.getItem(STORAGE_KEY) ?? storage.getItem("civicshift-demo-v5") ?? storage.getItem("civicshift-demo-v4");
   if (!raw) return seedState();
   // Do not replace unreadable or future-version data with an empty demo.
   const saved = JSON.parse(raw);
-  if (![4, 5].includes(saved?.version)) throw new Error("Unsupported demo data version. Export browser storage before resetting.");
+  if (![4, 5, 6].includes(saved?.version)) throw new Error("Unsupported demo data version. Export browser storage before resetting.");
   return migrateState(saved);
 }
 export function persistState(state, storage = localStorage) { storage.setItem(STORAGE_KEY, JSON.stringify(state)); }

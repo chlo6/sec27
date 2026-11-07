@@ -1,42 +1,49 @@
-# CivicShift interactive prototype implementation
+# CivicShift gamified volunteer demo
 
-## Baseline and delivery
+## Product and scope
 
-- Fetch and fast-forward `main` before editing; actual starting commit: `81d3443`, “Build complete CivicShift demo portal.”
-- Implement on `codex/civicshift-interactive-prototype`; commit and push that branch only.
-- Preserve `.openai/hosting.json`, the buildless architecture, Manrope, the palette, and existing portal entry/hash routes.
-- Deliver local preview and GitHub branch. No merge, force-push, or replacement Sites project.
+Discover a community need → choose a suitable shift → prepare → attend → receive verified hours and earned reputation → advance personal and school goals.
 
-## Implemented sequence
+Verified hours measure approved service time. Reputation is an accumulated record of reliability and contribution, and therefore also grows with participation; it is not an objective rating of personal quality. Badges are a separate, non-currency achievement system.
 
-### 1. Shared records and rules
+This phase extends the original buildless HTML/CSS/ES-module prototype. It preserves community stories, four demo roles, event management, waitlist offers, attendance, counselor reporting, existing entry URLs, Manrope, and `.openai/hosting.json`. Real login, backend permissions, delivered messages, live AI, continuous calendar sync and fraud-resistant attendance remain deferred.
 
-Extract persistence into `state.js`, with additive v4 → v5 migration. Preserve old state as a backup and retain custom records and saved changes. Track legacy background occupancy separately from registrations. Centralize eligibility, capacity, approvals, waitlist offers, attendance, verification, recommendations, and report data in `domain.js`.
+## Agreed behavior
 
-Mutations run on a copied state and commit only on success. Rejected actions are logged without partially changing registrations. At UI confirmation, reload persisted state, validate the actor and current rules, then save and render. Browser storage events update other open tabs.
+- Final visual direction: black and white with blue accents, per the team’s follow-up instruction. Use neutral surfaces, dark text, blue actions and blue achievement treatments across feed artwork, cards and dashboards.
 
-### 2. Feed and public/portal connection
+- Feed first: community stories plus distinct hour/reputation cards, personal quests, school-team progress, commitments, and a seven-day opportunity view.
+- Discovery: preserve search, categories, location, availability and sorting; add a seven-day date filter and keep capacity/eligibility visible.
+- Demo login: choose a persona or create a local profile without passwords. Onboarding/profile cover birth date, school, interests, skills, availability, location, languages, optional emergency contact, alias, team and notification preferences.
+- Waitlists: cancellation offers the freed place to the next eligible volunteer; acceptance rechecks the current rules. There is no surprise auto-registration.
+- Calendar: Google add-event links and Apple/Outlook-compatible ICS exports; these are not live synchronization.
+- Progress: personal quests and optional school cooperation; the school leaderboard is opt-in and uses aliases, equal ranks for ties, and reputation rather than hours.
+- Organizer/admin: owning organizers manage assessments, attendance and code sessions; admins finalize absence cases and corrections. Counselor reports continue to count only verified hours.
 
-Use the same application shell and data at both entry pages. Make `index.html` default to Community; retain `portal.html`'s dashboard default. Add common primary navigation, six fictional Cupertino/Bay Area stories, four additional events (fourteen combined shifts), search/cause filters, For You/Latest/Saved, and explanations using interests, location, and parsed weekly availability. Retain existing events and routes.
+## Scoring and progression
 
-Show verified goal progress and commitments alongside the desktop feed; stack on mobile. Admins can publish/hide stories, including hiding them from Saved. Organizers retain ownership restrictions; admins get all event screens and approval queues.
+| Evidence | Points |
+| --- | ---: |
+| Organizer-confirmed completion with verified, registration-linked hours | +10 |
+| Readiness acknowledged before shift start, followed by verified completion | +2 |
+| Explicit organizer/admin confirmation that agreed tasks were fulfilled | +3 |
+| Admin-finalized unexcused absence | −5 |
 
-### 3. Demo assistant
+Each positive reason is awarded once per registration, with a maximum of 15 points. Email opens, hourly duration, reviews, logins and badges do not generate points. All awards and reversals retain evidence and audit history; the visible balance is at least zero. Correcting evidence recalculates awards. Pending absence cases have no score effect, students can explain/appeal, and excused absences, ordinary withdrawals and organizer cancellations have no deduction. Reputation is not an eligibility gate.
 
-Use deterministic intents and local records. Supported requests find/explain shifts, inspect conflicts (including commitments changed after registration), compute remaining hours, and propose signup/cancellation. Proposals do not mutate data. Confirmation checks actor, consent/age, grade, skills, blocked dates, overlap, event state, time, and capacity again. Changed signup outcomes require a fresh proposal. Results enter activity history. Native modal behavior, Escape, focus restoration, labels, suggested prompts, and explicit demo disclosures keep the interaction understandable.
+Four record-derived quests award badges: First Step (one verified completed shift), Ready to Help (three verified completed shifts with advance readiness), Cause Explorer (three categories), and Service Milestone (ten verified hours). School teams are opt-in and target 20 verified hours dated within the current Monday–Sunday demo week. Only opted-in school members contribute. Rankings require at least one scored verified shift.
 
-### 4. Complete service journey
+## Shared implementation
 
-Approvals use the same eligibility rules as signups. Freed capacity produces an offer for the next eligible waiting volunteer; acceptance is explicit. An accepted offer on a manual event still needs approval. Offers reserve capacity, with withdrawal available and no background expiry.
+- v6 storage migrates v4/v5 additively, preserving old keys and user changes. New state holds reputation entries, completion assessments, readiness records, absence cases, code sessions and per-user preferences. No historical quality awards are fabricated.
+- `game.js` owns record-derived progress and idempotent reward/reminder reconciliation; `domain.js` owns permission-checked mutations. Ordinary controls and the assistant share those rules.
+- New hash routes: `#/login`, `#/progress`, `#/leaderboard`. The feed and existing portal use the same records and shell. New game views remain responsive and keyboard accessible.
+- A six-digit organizer code is scoped to one shift and lasts ten demo minutes or until shift end. Rotation/reset invalidates it; five failed submissions block that student for the session. Manual organizer check-in remains available. Checkout makes pending hours; verification and completion assessment remain separate from code entry.
+- Evaluate optional 24-hour in-app reminders on load and clock changes, once per registration. No closed-browser jobs or real email/SMS delivery. Readiness is independent of notification settings.
+- Assistant explains matching, hours, points, quests, school progress and attendance. Registration changes still require confirmation; no live inference or automatic attendance claims.
 
-Attendance requires the event date and a saved demo clock. Check-in must occur within the shift, checkout must follow check-in, and elapsed time produces a pending card linked to its registration and shift. Repeated actions cannot duplicate cards or verification; multiple shifts at one event remain distinct. Daily hour limits apply. Only verified records count toward goals and exports. Historical cached counters are not treated as evidence of service.
+## Verification and delivery
 
-The roster offers explicit advance/reset controls. Resetting only the clock preserves attendance; resetting all data restores fresh seed state. Consent and check-in codes are labeled demonstrations. CSV and calendar-file exports remain available; the calendar can navigate between months.
+Retain the original registration/attendance/report tests and add migration, scoring/reversal, reminders, code validation/lockout, per-user preferences, privacy, team and assistant tests. Exercise the end-to-end flow across four roles and inspect desktop/tablet/mobile layouts, labels, focus, history/deep links and reduced-motion rules. Record actual results in VERIFICATION.md.
 
-### 5. Verification and handoff
-
-Run the dependency-free Node tests, inspect desktop/tablet/mobile layouts, exercise keyboard/dialog focus, validate browser persistence/history/deep links, and walk through all four roles. Document concrete results and limits in `VERIFICATION.md`. Update README and credits, commit all prototype changes, and push with upstream tracking.
-
-## Deferred implementation
-
-Real authentication; server-enforced roles; database transactions and migrations; private document/waiver storage; actual QR tokens/scanning; live news; model hosting and evaluations; unattended agents; notifications via email/SMS; and production analytics remain outside this phase. A production implementation must move domain validation and authoritative state to a server and define idempotency/concurrency semantics.
+Before editing, fetched remote changes, fast-forwarded local main, created `codex/civicshift-game-demo` from main, and incorporated the original prototype branch. The inspected remote main was `81d3443`; prototype baseline was `93d8846`. Deliver a local preview and commit/push the feature branch only. Do not force-push, merge into main, or modify hosting.

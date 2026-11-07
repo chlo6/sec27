@@ -1,51 +1,50 @@
-# Prototype verification
+# Game-demo verification
 
-Verified locally on October 10, 2026, against the implementation based on `main` commit `81d3443`.
+Verified November 7, 2026 on `codex/civicshift-game-demo`, based on prototype commit `93d8846`. Remote main was fetched before editing and remained at `81d3443`.
 
 ## Automated checks
 
-`npm test`: **20 tests passed, 0 failed**, using Node's built-in runner and the same modules imported by the application.
+`npm test`: **39 passing, 0 failing**. Uses Node's built-in runner and the actual application modules; no external packages.
 
-| Area | Covered cases |
+| Area | Coverage |
 | --- | --- |
-| State | Fresh seed (6 stories, 10 events, 14 shifts), additive v4 migration, custom changes preserved, repeated migration, v4 backup, save/reload, independent reset seed, unreadable storage preserved |
-| Registration | Duplicates, adjacent shifts, overlaps, grade, all required skills, minor consent, adult consent exemption, blocked dates, canceled events, past start time, full capacity |
-| Approval | Ownership, admin access, rechecking consent/skills/conflicts/time/capacity, repeated approval rejected |
-| Waitlist | Full shift queues, cancellation offers next eligible volunteer, ineligible volunteer skipped, offer reserves capacity, explicit acceptance, stale acceptance rejection, duplicate acceptance |
-| Attendance | Check-out before check-in rejected, simulated date/time, repeated check-in/check-out rejected, two shifts at one event produce distinct time cards, pending totals excluded, verification counted once |
-| Reports | Organizer scope, admin review, school-scoped counselor export, actual verified totals, CSV values, calendar file includes approved active registrations and correct times |
-| Community | Search, cause filter, chronological Latest, Saved, hidden stories absent from Saved, republishing restores visibility |
-| Assistant | Nonmutating suggestions, explained interest/location/weekly availability, Saturday matching, remaining hours, unsupported requests, stale capacity outcome rejected and logged, conflicts caused by later schedule edits |
+| Existing workflows | All 20 original tests: registration, duplicates/conflicts, consent/skills/grade, capacity, ownership, approval, waitlist offers and acceptance, two shifts at one event, verified totals, counselor/organizer exports, feed behavior and assistant confirmations |
+| Migration | v4/v5 → v6, preserved custom records, original storage keys, opt-in preferences, per-user notification defaults, repeated load, no fabricated reputation |
+| Reputation | Explicit completion, 10+2+3 awards, repeat-action idempotency, independence from time quantity, outside-hour exclusion, assessment/time-card reversals, badge recalculation |
+| Absences | Pending case has no deduction, only admin finalizes, −5 for unexcused absence, student appeal suspends deduction, excusal reverses it, ordinary cancellation remains neutral |
+| Attendance codes | Ownership, approved registration, canonical event/shift consistency, time window, six-digit format, wrong-code attempt persistence across reload, five-attempt lockout, rotation, expiry, reset invalidation, duplicate check-in |
+| Progress | Three-shift/three-cause quest completion, independent multiple shifts, Monday–Sunday school totals, opt-in membership, alias rankings, tied scores, privacy and per-user preferences |
+| Reminders/languages | Future 24-hour window, one reminder per registration, opt-out, reload/reset idempotency, language recommendations, organizer preference updates |
+| Assistant | All new explanations read records without mutations; points, quests, school goals and check-in limitations are accurate; existing action confirmations stay intact |
 
-Additional checks: JavaScript syntax checks and `git diff --check`. Existing `.openai/hosting.json` remains unchanged.
+JavaScript syntax and `git diff --check` also pass. Hosting configuration is unchanged. Pure rendering smoke checks cover progress, leaderboard, assessment, absence, calendar and active attendance-code panels.
 
 ## Browser walkthroughs
 
-Tested in the Codex in-app browser with the local HTTP server:
+Used a separate preview origin on port 4174 to isolate disposable QA data from the existing preview on port 4173.
 
-- Feed search for “reading,” save a story, Saved view, and reload persistence.
-- Assistant proposes the reading shift; explicit confirmation creates a pending signup.
-- Organizer Marcus approves that signup, sets the saved clock to October 28 at 15:30, checks in, advances to 17:30, and checks out.
-- Time card remains pending until verification. Maya's total in the counselor view rises from **10.50 to 12.50**, reflecting exactly the verified 2-hour card.
-- Admin hides the saved reading story; Saved becomes empty. Admin access and story publication behavior were exercised in browser and automated checks.
-- A proposal was left open while a second tab removed Maya's demo consent. Confirmation rejected the action using the latest state and explained why.
-- Unsupported assistant request (“email my counselor”) explains supported requests and demo limitations.
-- Reset all demo data restores the seeded roles, records, and clock. Browser preview left in fresh student state.
-- `portal.html#/event/evt-books` opens directly. Back/Forward moves correctly between Community and Opportunities. Existing portal entry remains functional.
-- Calendar month navigation reaches November; the calendar download control is retained. CSV/ICS content is validated in automated tests. The browser automation download-event capture timed out, so OS file-save completion was not verified through that API.
-- No JavaScript console errors observed during the final browser checks.
+- Maya confirmed readiness for the approved Garden Setup shift before start.
+- Nina advanced the saved clock to October 17 at 08:00 and generated a six-digit code, visibly expiring at 08:10.
+- Maya entered the code and was checked in; no service credit was issued from code entry alone.
+- Nina advanced to 10:00, checked Maya out, verified the pending two-hour time card, and explicitly confirmed completion and tasks.
+- Progress showed **12.50 verified hours and 15 reputation points**, with +10, +2 and +3 ledger entries, First Step and Service Milestone badges.
+- Maya opted into the school team and leaderboard as **Garden Fox**. School progress showed **2.00/20 hours**, and the leaderboard used the alias, reputation and badges. Reload preserved these results.
+- Counselor view showed Maya's **12.50h** and the school's **17.50h** total, with no reputation added to service credit.
+- A new Cleanup registration was confirmed, then marked absent after shift end. Admin review finalized an unexcused absence, changing reputation from 15 to 10. Maya's correction request returned the case to pending and restored the suspended five points with a visible ledger reversal; hours remained 12.50.
+- Assistant accurately explained Maya's current reputation. Escape closed the drawer and returned focus to its launcher.
+- Next-seven-days filtering at October 17 returned the October 21 Math Lab and October 24 Creek opportunities.
+- Password-free local profile creation reached onboarding. Back/Forward restored the login/profile routes.
+- Full reset restored Maya to 10.50 hours and zero reputation. The test origin was isolated from existing preview data.
+- No JavaScript console errors were observed. The main preview was restarted on port 4173 and its new palette verified in a fresh tab.
 
-## Responsive and keyboard checks
+## Layout and accessibility
 
-- **Desktop:** 1280×720 and 1440×1000. Feed and service sidebar fit; no horizontal page overflow at 1440px.
-- **Tablet:** 768×1024. Feed and sidebar remain readable; document width equals viewport width.
-- **Mobile:** 390×844. Single-column feed, fitting navigation/role controls, full-width assistant drawer; document width equals viewport width.
-- Keyboard Enter opens registration confirmation. Escape closes it and returns focus to the request control.
-- Assistant Tab and Shift+Tab wrap between its first/last controls; Escape returns focus to its launcher, including after a mutation rerenders the page.
-- Mobile navigation moves focus inside when opened and supports Escape. Collapsed navigation is hidden from focus through CSS visibility.
-- Native labels and accessible names inspected for search, filters, roles, personas, clock, signup, and assistant controls.
-- Reduced-motion rules verified in the loaded stylesheets; no OS motion preference was changed. This is not a full screen-reader or WCAG conformance audit.
+- Desktop checked at 1440×1000, tablet at 768×1024, mobile at 390×844. Document width equals viewport width in the checked progress/feed/discovery views.
+- Mobile navigation opens with focus inside, and Escape closes it. A transient transition frame was inspected; settled navigation is offscreen and hidden.
+- Native form labels are present for readiness/code entry, role/persona selectors, clock, profile, filters and review forms. Assessment and absence detail panels are keyboard-operable native disclosures.
+- Reduced-motion CSS disables/reduces transitions. This is a targeted keyboard/layout review, not a full WCAG or assistive-technology audit.
+- Final visual direction is black/white with blue accents, including feed art and progress/badge treatments. Light and dark themes were inspected. Versioned CSS URLs refresh cached styles.
 
-## Practical limits
+## Limits
 
-The tests validate a browser-local demonstration. They do not establish production authentication, server permissions, database concurrency, real consent, background expiry, or delivery of messages. Browser engines beyond the in-app browser and actual calendar-provider imports were not exercised. The Sites hosting target was not accessible; no hosted deployment was changed.
+Browser-local demo only. Local storage is editable and cross-tab updates are not server transactions. Code sharing cannot prove physical presence. No real authentication, live model, background jobs, delivered email/SMS, production consent or calendar synchronization is claimed. Actual provider calendar imports and other browser engines were not tested. Tests cover CSV/ICS content. No hosted deployment was changed.

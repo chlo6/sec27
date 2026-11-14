@@ -82,3 +82,12 @@ Integration checks: all 39 regression tests pass; JavaScript syntax, conflict-ma
 Started from freshly fetched main `5e852c9`. Added an official GitHub Actions workflow that tests under Node 24, packages only `dist/`, and deploys to the `github-pages` environment. YAML parsing, relative asset/import checks, all 39 local tests, and `git diff --check` pass. Existing hosting manifest and app behavior are unchanged.
 
 The repository is public. Current GitHub credentials have push access but no admin/maintainer permission; Pages was not enabled when inspected. The browser session is signed out of GitHub. Owner/maintainer activation under Settings → Pages → Source: GitHub Actions is required before the live deployment can be verified. README includes the exact setup, run, and open-site instructions.
+
+
+## Plain-language interface — November 14, 2026
+
+Replaced decorative copy with direct page labels, activity titles, descriptions, and empty states. The feed is titled Quests; navigation, browser titles, and breadcrumbs agree. Existing saved demo records receive updated copy only where fields exactly match the previous defaults. Organizer edits, hidden/saved stories, registrations, hours, and reputation remain intact.
+
+All 40 tests pass, including the new saved-copy refresh and reload check. Diff whitespace checks pass. Local browser checks confirmed the updated feed and Progress page, keyboard link navigation, and the shorter quest descriptions.
+
+GitHub Pages is now enabled and the initial deployment succeeded. Both public entry pages and all seven directly referenced CSS/JavaScript assets returned HTTP 200. Main pushes automatically run tests and publish the site.

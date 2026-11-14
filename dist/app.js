@@ -8,11 +8,11 @@ const dialogMessage = document.querySelector(".dialog-message");
 const toast = document.querySelector(".toast");
 
 const dialogContent = {
-  signin: ["Welcome back.", "Sign-in will connect to the role-based account system in the next build phase."],
-  join: ["Ready to make an impact?", "Choose the role that best fits you. Account creation will be connected in the next build phase."],
-  organizer: ["Turn plans into a fully staffed shift.", "Organizer tools will include event creation, approvals, attendance, and hour verification."],
-  admin: ["Keep the community trusted.", "Admin tools will support organization approval, activity review, permissions, and issue resolution."],
-  coverage: ["Fill the last open spots.", "Matching will suggest qualified, available volunteers without creating schedule conflicts."],
+  signin: ["Sign in", "Sign-in will connect to the role-based account system in the next build phase."],
+  join: ["Choose a role", "Choose the role that best fits you. Account creation will be connected in the next build phase."],
+  organizer: ["Organizer dashboard", "Organizer tools will include event creation, approvals, attendance, and hour verification."],
+  admin: ["Admin dashboard", "Admin tools will support organization approval, activity review, permissions, and issue resolution."],
+  coverage: ["Open shifts", "Matching will suggest qualified, available volunteers without creating schedule conflicts."],
 };
 
 const roleData = {

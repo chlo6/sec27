@@ -22,6 +22,24 @@ test('v4 migration is additive, persistent, idempotent, and preserves edited and
 test('unreadable storage is not silently overwritten; reset seed independent',()=>{
  const storage=memory();storage.setItem(STORAGE_KEY,'broken');assert.throws(()=>loadState(storage));const a=seedState();a.events[0].title='Edited';assert.notEqual(seedState().events[0].title,'Edited');
 });
+test('plain demo copy refresh preserves saved edits, hidden stories, and service records',()=>{
+ const saved=seedState(),story=saved.stories.find(s=>s.id==='story-creek'),event=saved.events.find(e=>e.id==='evt-creek');
+ story.title='A cleaner creek starts with a Saturday morning.';
+ story.summary='Custom organizer summary';story.status='hidden';
+ event.title='Give the creek a fresh start';event.whatToBring='Custom supplies';
+ saved.events.find(e=>e.id==='evt-books').title='Custom reading event';
+ saved.savedStories['stu-1']=[story.id];
+ const storage=memory();persistState(saved,storage);const updated=loadState(storage);
+ assert.equal(updated.stories.find(s=>s.id===story.id).title,'Creek cleanup volunteers');
+ assert.equal(updated.stories.find(s=>s.id===story.id).summary,'Custom organizer summary');
+ assert.equal(updated.stories.find(s=>s.id===story.id).status,'hidden');
+ assert.equal(updated.events.find(e=>e.id===event.id).title,'Creek cleanup');
+ assert.equal(updated.events.find(e=>e.id===event.id).whatToBring,'Custom supplies');
+ assert.equal(updated.events.find(e=>e.id==='evt-books').title,'Custom reading event');
+ for(const key of ['savedStories','signups','hours','reputation'])assert.deepEqual(updated[key],saved[key]);
+ assert.equal(story.title,'A cleaner creek starts with a Saturday morning.');
+ persistState(updated,storage);assert.deepEqual(loadState(storage),updated);
+});
 test('duplicate signup and overlapping shifts rejected; adjacent shifts allowed',()=>{
  const s=seedState();assert.match(submit(s,'evt-garden','sh-garden-setup').message,/already registered/);
  assert.equal(submit(s,'evt-garden','sh-garden-main').ok,true);

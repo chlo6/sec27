@@ -1,5 +1,5 @@
 import { DEMO_ACTIVITY, DEMO_EVENTS, DEMO_HOURS, DEMO_MESSAGES, DEMO_NOTIFICATIONS, DEMO_SIGNUPS, DEMO_USERS } from "./data.js";
-import { EXTRA_EVENTS, STORIES } from "./community-data.js";
+import { EXTRA_EVENTS, STORIES, refreshDemoCopy } from "./community-data.js?v=7";
 import { evaluateGame } from "./game.js";
 const clone = value => JSON.parse(JSON.stringify(value));
 export const STORAGE_KEY = "civicshift-demo-v6";
@@ -43,6 +43,7 @@ export function migrateState(saved) {
     for (const event of EXTRA_EVENTS) if (!state.events.some(e => e.id === event.id)) state.events.push(clone(event));
   }
   state.stories ??= clone(STORIES);
+  refreshDemoCopy(state);
   state.savedStories ??= {};
   state.unavailableByUser ??= {[state.activeUser.student]: clone(state.unavailableDates)};
   state.clock ??= INITIAL_CLOCK;

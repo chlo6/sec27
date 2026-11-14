@@ -6,9 +6,9 @@ An original, buildless gamified volunteer coordination prototype for the team's 
 
 **[Open CivicShift →](https://chlo6.github.io/sec27/)**
 
-No download, terminal, or local server is needed once GitHub Pages is enabled. From the [repository home](https://github.com/chlo6/sec27), click **Open CivicShift** in this README. After the first successful deployment, you can also open **Deployments → github-pages → View deployment**.
+GitHub Pages is enabled and the site is live. No download, terminal, or local server is needed. From the [repository home](https://github.com/chlo6/sec27), click **Open CivicShift** in this README. After the first successful deployment, you can also open **Deployments → github-pages → View deployment**.
 
-### One-time setup by the repository owner or maintainer
+### Deployment settings (already configured)
 
 1. Open [Settings → Pages](https://github.com/chlo6/sec27/settings/pages).
 2. Under **Build and deployment → Source**, select **GitHub Actions**. The workflow is already included; do not create another one.
@@ -91,7 +91,7 @@ Unreadable or unsupported future-version storage is not silently replaced. Expor
 npm test
 ```
 
-Uses Node's built-in test runner (Node 20+), with no packages to install. The automated suite has 39 passing tests. See [verification results](docs/VERIFICATION.md) and [implementation plan](docs/IMPLEMENTATION_PLAN.md) for verification scope and walkthroughs.
+Uses Node's built-in test runner (Node 20+), with no packages to install. The automated suite has 40 passing tests. See [verification results](docs/VERIFICATION.md) and [implementation plan](docs/IMPLEMENTATION_PLAN.md) for verification scope and walkthroughs.
 
 ## Source map
 

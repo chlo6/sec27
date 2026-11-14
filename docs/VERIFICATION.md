@@ -75,3 +75,10 @@ This is targeted UI verification, not a new end-to-end audit of every portal fun
 Merged `codex/civicshift-minimal-quests` (`1e6adfe`) into main after fetching remote main (`ecacbf3`). Resolved portal HTML/CSS/JS conflicts using the verified game/quest implementation, carrying forward main’s concise portal headings, organizer/school context, neutral dark detail surfaces, header alerts, theme switching, and demo login access. Retained password-free persona access and shared domain records. Kept the native Alerts disclosure styling so main’s old hover-only notification rules cannot hide it. Hosting configuration is unchanged.
 
 Integration checks: all 39 regression tests pass; JavaScript syntax, conflict-marker scan, and diff whitespace checks pass. Browser smoke checks confirmed six paper quests, a visible native Alerts preview, Student dashboard totals of 10.50 hours and zero reputation, seven password-free demo personas, and no console errors. The preview was left on the dashboard.
+
+
+## GitHub Pages configuration — November 14, 2026
+
+Started from freshly fetched main `5e852c9`. Added an official GitHub Actions workflow that tests under Node 24, packages only `dist/`, and deploys to the `github-pages` environment. YAML parsing, relative asset/import checks, all 39 local tests, and `git diff --check` pass. Existing hosting manifest and app behavior are unchanged.
+
+The repository is public. Current GitHub credentials have push access but no admin/maintainer permission; Pages was not enabled when inspected. The browser session is signed out of GitHub. Owner/maintainer activation under Settings → Pages → Source: GitHub Actions is required before the live deployment can be verified. README includes the exact setup, run, and open-site instructions.

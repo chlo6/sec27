@@ -65,3 +65,8 @@ Implemented on `codex/civicshift-minimal-quests`, based on game-demo commit `658
 ## Main integration
 
 The team subsequently authorized merging and pushing the completed quest-board design to `main`. Preserve both branch histories in a merge commit, retain the prototype’s domain and game modules, reconcile main’s portal copy/header improvements, run the existing regression suite, and push normally without force. Future work uses `main`.
+
+
+## GitHub Pages sharing
+
+Publish the buildless `dist/` directory at `https://chlo6.github.io/sec27/` using `.github/workflows/pages.yml`. Trigger on main pushes and manual runs; run all regression tests before packaging, limit write permissions to deployment, and serialize Pages deployments. Preserve hash routes and relative assets for the repository subpath. Add a direct README link and owner setup instructions. GitHub requires owner/maintainer or delegated Pages-settings access to enable the publishing source; ordinary repository push access is insufficient. Keep the existing Sites manifest unchanged.

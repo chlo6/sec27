@@ -2,6 +2,24 @@
 
 An original, buildless gamified volunteer coordination prototype for the team's FBLA website project. Students discover local needs, register for shifts, and track organizer-verified service. All stories, organizations, people, and activity are fictional demo content.
 
+## Open the website from GitHub
+
+**[Open CivicShift →](https://chlo6.github.io/sec27/)**
+
+No download, terminal, or local server is needed once GitHub Pages is enabled. From the [repository home](https://github.com/chlo6/sec27), click **Open CivicShift** in this README. After the first successful deployment, you can also open **Deployments → github-pages → View deployment**.
+
+### One-time setup by the repository owner or maintainer
+
+1. Open [Settings → Pages](https://github.com/chlo6/sec27/settings/pages).
+2. Under **Build and deployment → Source**, select **GitHub Actions**. The workflow is already included; do not create another one.
+3. Open [Actions → Deploy CivicShift to GitHub Pages](https://github.com/chlo6/sec27/actions/workflows/pages.yml).
+4. Select **Run workflow**, choose **main**, and run it. If a run previously failed before Pages was enabled, rerun it.
+5. Wait for both jobs to turn green, then open the website link above. The address will not serve the app until this setup and the first deployment succeed.
+
+After setup, each push to `main` runs the regression tests and publishes only `dist/` when they pass. Manual deployment is also available from Actions. GitHub hosts the website; your computer does not need to stay on.
+
+Each visitor has separate browser-local demo records. Your teammate can explore the same interface and fictional starting data, but registrations and profile edits do not sync between your browsers.
+
 ## Run locally
 
 ```bash
@@ -14,7 +32,7 @@ The homepage opens the community quest board. `portal.html` still opens the dash
 
 ## Minimal quest-board interface
 
-The `codex/civicshift-minimal-quests` branch presents community needs as broad paper-like quest cards, with readable descriptions, dates, available places, and links to the existing opportunity flows. Thin rules, folded corners, and original SVG stamps give the board a restrained parchment feel. Black and white remain the base palette, with blue accents and a faint warm-white paper surface.
+The interface, now merged into `main`, presents community needs as broad paper-like quest cards, with readable descriptions, dates, available places, and links to the existing opportunity flows. Thin rules, folded corners, and original SVG stamps give the board a restrained parchment feel. Black and white remain the base palette, with blue accents and a faint warm-white paper surface.
 
 Georgia system-serif headings pair with Manrope body text and controls. The native **Menu** disclosure replaces the permanent sidebar; role and persona controls remain available. Personal quests and the calendar sit in expandable sections after the feed, keeping the first screen focused on discovery. Verified hours and reputation remain visibly separate.
 
@@ -90,7 +108,8 @@ Uses Node's built-in test runner (Node 20+), with no packages to install. The au
 | `dist/assistant.js` | Deterministic intent matching and confirmation drawer |
 | `dist/data.js`, `dist/community-data.js` | Fictional original and additional records |
 | `tests/*.test.js` | Migration, service workflows, permissions, reputation, codes, reminders, game views and assistant tests |
-| `.openai/hosting.json` | Existing static hosting configuration; unchanged |
+| `.github/workflows/pages.yml` | Tests and deploys `dist/` to GitHub Pages on main pushes |
+| `.openai/hosting.json` | Existing Sites hosting configuration; preserved |
 
 The previous marketing-only `app.js` and `styles.css` remain in the repository for reference; the shared application entry pages do not load them.
 
@@ -98,7 +117,7 @@ The previous marketing-only `app.js` and `styles.css` remain in the repository f
 
 This is a **browser-local interactive demo**, with simulated roles and consent. Local permission checks demonstrate the workflow; users can edit browser storage. There is no real authentication, backend, live news, hosted model, background agent, email/SMS delivery, signed waiver, geolocation verification, or QR scanner. Six-digit codes are a browser-local workflow demonstration; they cannot establish physical presence or prevent sharing. The assistant uses deterministic rules, not live AI inference. Local storage synchronizes ordinary changes across tabs, but is not a server transaction or a concurrency guarantee.
 
-The existing Sites project was inaccessible from this chat. Delivery is the local preview and a separate GitHub feature branch; hosting configuration is preserved.
+GitHub Pages publishes this static demo using the workflow described above. The existing Sites configuration is preserved and is independent of GitHub Pages.
 
 ## Originality and credits
 

@@ -48,3 +48,23 @@ Used a separate preview origin on port 4174 to isolate disposable QA data from t
 ## Limits
 
 Browser-local demo only. Local storage is editable and cross-tab updates are not server transactions. Code sharing cannot prove physical presence. No real authentication, live model, background jobs, delivered email/SMS, production consent or calendar synchronization is claimed. Actual provider calendar imports and other browser engines were not tested. Tests cover CSV/ICS content. No hosted deployment was changed.
+
+
+## Minimal quest-board UI — November 14, 2026
+
+Branch: `codex/civicshift-minimal-quests`. All **39 existing tests pass** after UI changes. JavaScript syntax and `git diff --check` pass. Domain, migration, reputation, attendance, and registration rules were not changed.
+
+Browser checks used the existing local preview on port 4173. Checked desktop, tablet, and mobile viewport presets, with effective CSS widths of 1600, 853, 433, and 355 pixels at the browser's existing zoom. No horizontal document overflow was observed on the inspected feed, progress and event-detail surfaces.
+
+- Search for reading returned one matching quest; Animal Welfare filtering returned the shelter quest and its waitlist opportunity.
+- Save/Saved/Unsave updated the card and count; the temporary saved item was removed afterward.
+- Event details opened from the board. Back restored the filtered board, Forward reopened details, and route changes focused the workspace.
+- Menu opens with Enter and closes with Escape, returning focus to its summary. It retains role-specific calendar, hour, profile, event-management and reporting links.
+- Assistant opens from the header, accurately explains personal quest progress, and closes with Escape, restoring launcher focus.
+- Student, organizer, admin, and counselor dashboards render. Staff community views omit the student's personal service strip.
+- Light and dark personal quest cards were inspected. Dark-mode primary-button hover contrast was corrected.
+- Header notification preview showed the active student’s alerts. No browser console errors were recorded.
+- Reduced-motion CSS explicitly disables animations and transitions. No new animations were introduced.
+- Saved demo records were preserved. Test role/theme changes were restored to Student / Maya / light mode.
+
+This is targeted UI verification, not a new end-to-end audit of every portal function or a full accessibility audit. Prior domain and journey verification remains documented above.

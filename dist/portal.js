@@ -1,9 +1,9 @@
 import { CATEGORIES, DEMO_TODAY, ROLE_LABELS } from "./data.js";
 import { STORAGE_KEY, INITIAL_CLOCK, seedState, loadState, persistState } from "./state.js";
 import { act, eligibility, canManage, canReviewHour, recommendations, verifiedHours, reportData, studentCSV, hoursCSV, reportCSV, calendarFile } from "./domain.js";
-import { feedView, storiesView, commonNav } from "./community.js";
+import { feedView, storiesView, commonNav } from "./community.js?v=9";
 import { evaluateGame, reputationPoints } from "./game.js";
-import { progressView, leaderboardView, progressSnapshot, weekCalendar, studentShiftTools, codePanel, assessmentPanel, absencePanel, rulesPanel } from "./game-ui.js";
+import { progressView, leaderboardView, progressSnapshot, weekCalendar, studentShiftTools, codePanel, assessmentPanel, absencePanel, rulesPanel } from "./game-ui.js?v=9";
 import { installAssistant } from "./assistant.js";
 
 const app = document.querySelector("#app");
@@ -83,41 +83,16 @@ function navMarkup(route) {
     const heading = section !== lastSection ? `<span class="nav-section-label">${section}</span>` : "";
     lastSection = section;
     const badge = key === "notifications" && unreadCount() ? `<span class="nav-badge">${unreadCount()}</span>` : "";
-    return `${heading}<a href="#/${key}" class="${route === key ? "active" : ""}"><span class="nav-icon" aria-hidden="true">${icon}</span>${label}${badge}</a>`;
+    return `${heading}<a href="#/${key}" class="${route === key ? "active" : ""}" ${route===key?'aria-current="page"':""}><span class="nav-icon" aria-hidden="true">${icon}</span>${label}${badge}</a>`;
   }).join("");
 }
 
+function notificationPreview() {
+  const items=state.notifications.filter(item=>item.role===state.role&&(!item.userId||item.userId===currentUser().id)).slice(0,3);
+  return `<div class="notification-preview"><div class="card-head"><strong>Notifications</strong><a href="#/notifications">View all →</a></div>${items.length?items.map(item=>`<a class="notification-preview-item ${item.read?'':'unread'}" href="${esc(item.link||'#/notifications')}"><strong>${esc(item.title)}</strong><small>${esc(item.body)}</small><time>${esc(item.time)}</time></a>`).join(''):'<p>No notifications yet.</p>'}</div>`;
+}
 function shell(content, route, title) {
-  const user = currentUser();
-  return `${commonNav(state.role,route)}
-    <div class="app-shell ${route === "community" ? "feed-shell" : ""}">
-      <aside class="sidebar" aria-label="Portal navigation">
-        <a class="brand" href="#/community" aria-label="CivicShift homepage">
-          <svg viewBox="0 0 42 42" aria-hidden="true"><path d="M10 22.5 20.5 7 31 22.5 20.5 35 10 22.5Z" fill="currentColor"/><path d="m15.3 22.4 5.2-7.8 5.2 7.8-5.2 6.2-5.2-6.2Z" fill="#101d42"/></svg><span>CivicShift</span>
-        </a>
-        <div class="role-pill"><span class="role-avatar">${esc(user.avatar || user.name.slice(0,2))}</span><div><strong>${esc(user.name)}</strong><span>${esc(ROLE_LABELS[state.role])}</span></div></div>
-        <nav class="side-nav">${navMarkup(route)}</nav>
-        <div class="sidebar-footer">
-          <a href="#/about"><span>◎</span> About this project</a>
-          <button type="button" data-action="toggle-dark"><span>◐</span> ${state.settings.dark ? "Light mode" : "Dark mode"}</button>
-          <a href="#/login"><span>⇄</span> Demo accounts</a>
-        </div>
-      </aside>
-      <div class="app-main">
-        <header class="topbar">
-          <div class="topbar-left"><button class="icon-button mobile-menu" type="button" data-action="toggle-sidebar" aria-label="Open navigation" aria-expanded="false">☰</button><span class="breadcrumb">CivicShift / <strong>${esc(title)}</strong></span></div>
-          <div class="topbar-actions">
-            <label class="sr-only" for="role-switch">Preview role</label>
-            <select class="role-switch" id="role-switch" data-role-switch>
-              ${Object.entries(ROLE_LABELS).map(([value,label]) => `<option value="${value}" ${value === state.role ? "selected" : ""}>${esc(label)}</option>`).join("")}
-            </select>
-            <label class="sr-only" for="persona-switch">Demo persona</label><select class="role-switch" id="persona-switch" data-persona-switch>${state.users.filter(u=>u.role===state.role).map(u=>`<option value="${u.id}" ${u.id===currentUser().id?"selected":""}>${esc(u.name)}</option>`).join("")}</select>
-            <a class="icon-button notification-button" href="#/notifications" aria-label="Notifications">♢${unreadCount() ? "<i></i>" : ""}</a>
-          </div>
-        </header>
-        <main class="workspace ${route === "community" ? "feed-workspace" : ""}" id="workspace" tabindex="-1">${content}</main>
-      </div>
-    </div>`;
+  return `${commonNav(state.role,route)}<div class="app-shell notebook-shell ${route==='community'?'feed-shell':''}"><div class="app-main"><header class="topbar"><div class="topbar-left"><details class="portal-menu"><summary>Menu <span aria-hidden="true">＋</span></summary><nav aria-label="Portal navigation">${navMarkup(route)}<a href="#/about">About this project</a><a href="#/login">Demo accounts</a></nav></details><span class="breadcrumb">${esc(title)}</span></div><div class="topbar-actions"><div class="demo-persona-control"><label for="role-switch">Demo role</label><select class="role-switch" id="role-switch" aria-label="Demo role" data-role-switch>${Object.entries(ROLE_LABELS).map(([value,label])=>`<option value="${value}" ${value===state.role?'selected':''}>${esc(label)}</option>`).join('')}</select></div><div class="demo-persona-control"><label for="persona-switch">Viewing as</label><select class="role-switch" id="persona-switch" aria-label="Viewing as" data-persona-switch>${state.users.filter(u=>u.role===state.role).map(u=>`<option value="${u.id}" ${u.id===currentUser().id?'selected':''}>${esc(u.name)}</option>`).join('')}</select></div><details class="alerts-menu"><summary aria-label="Notifications${unreadCount()?`, ${unreadCount()} unread`:''}">Alerts <span>${unreadCount()}</span></summary>${notificationPreview()}</details><button class="theme-switch" type="button" data-action="toggle-dark" aria-label="Switch to ${state.settings.dark?'light':'dark'} mode" title="Switch to ${state.settings.dark?'light':'dark'} mode">${state.settings.dark?'☀':'☾'}</button><a class="topbar-login" href="#/login">Demo login ↗</a></div></header><main class="workspace ${route==='community'?'feed-workspace':''}" id="workspace" tabindex="-1">${content}</main></div></div>`;
 }
 
 function pageHead(eyebrow, title, copy = "", actions = "") {
@@ -161,7 +136,7 @@ function studentDashboard() {
   const upcoming = state.signups.filter((signup) => signup.studentId === student.id && ["approved","pending","waitlist","offered"].includes(signup.status)).map((signup) => ({ ...signup, event: getEvent(signup.eventId) })).filter((item) => item.event?.status==="active" && item.event.date>=state.clock.slice(0,10));
   const verified = verifiedHoursFor(student.id);
   const progress = Math.min((verified / student.requirementGoal) * 100, 100);
-  return `${pageHead("Student dashboard", `Good afternoon, ${esc(student.name.split(" ")[0])}.`, "Your schedule, service progress, and next best opportunities are all in one place.", `<a class="button button-primary" href="#/explore">Find a shift</a><a class="button button-light" href="#/hours">Log hours</a>`)}
+  return `${pageHead("Student dashboard", "Your dashboard", "Your schedule, service progress, and next best opportunities are all in one place.", `<a class="button button-primary" href="#/explore">Find a shift</a><a class="button button-light" href="#/hours">Log hours</a>`)}
     <section class="grid grid-4" aria-label="Service summary">
       ${metric("Verified service", `${verified.toFixed(2)}h`, `${student.requirementGoal - verified > 0 ? (student.requirementGoal - verified).toFixed(2) : 0} hours to goal`, "var(--mint-soft)")}
       ${metric("Upcoming shifts", upcoming.filter((item) => item.status === "approved").length, "Approved commitments", "var(--blue-soft)")}
@@ -184,7 +159,7 @@ function organizerDashboard() {
   const pending = state.signups.filter((signup) => eventIds.has(signup.eventId) && signup.status === "pending");
   const pendingHours = state.hours.filter(entry => entry.status === "pending" && canReviewHour(state,entry)).length;
   const volunteers = new Set(state.signups.filter((signup) => eventIds.has(signup.eventId)).map((signup) => signup.studentId)).size;
-  return `${pageHead("Organizer dashboard", `${esc(user.nonprofitName)} at a glance.`, "Keep shifts staffed, approvals moving, and volunteer records accurate.", `<a class="button button-primary" href="#/events/new">Create event</a><a class="button button-light" href="#/communications">Send update</a>`)}
+  return `${pageHead("Organizer dashboard", "Organizer dashboard", "Keep shifts staffed, approvals moving, and volunteer records accurate.", `<a class="button button-primary" href="#/events/new">Create event</a><a class="button button-light" href="#/communications">Send update</a>`)}
     <section class="grid grid-4">${metric("Upcoming events", events.length, "Across all recurring series","var(--blue-soft)")}${metric("Registered volunteers", volunteers, "Unique students","var(--mint-soft)")}${metric("Unfilled shift spots", events.reduce((sum,event)=>sum+openSpots(event),0), "Matching suggestions available","var(--coral-soft)")}${metric("Hours awaiting review", pendingHours, "Keep records current","var(--yellow-soft)")}</section>
     <section class="grid grid-3" style="margin-top:17px">
       <article class="card span-2"><div class="card-head"><div><h2>Staffing health</h2><p>Open capacity by upcoming event</p></div><a class="button button-link" href="#/events">Manage events →</a></div><div class="list">${events.map((event)=>{const filled=totalFilled(event),capacity=totalCapacity(event),percent=Math.round(filled/capacity*100);return `<div class="list-row"><span class="list-icon">${dayNumber(event.date)}</span><div class="list-copy"><strong>${esc(event.title)}</strong><span>${filled} of ${capacity} spots filled · ${formatDate(event.date)}</span><div class="progress" style="margin-top:7px"><span style="width:${percent}%"></span></div></div><div class="list-side"><strong>${openSpots(event)} open</strong><span>${percent}% staffed</span></div></div>`}).join("")}</div></article>
@@ -196,7 +171,7 @@ function organizerDashboard() {
 
 function adminDashboard() {
   const students = state.users.filter((user)=>user.role==="student");
-  return `${pageHead("Administration", "Keep the network safe and trustworthy.", "Review organizations, monitor access, and resolve concerns without exposing student information.", `<a class="button button-primary" href="#/approvals">Review organizations</a><a class="button button-light" href="#/safety">Open safety queue</a>`)}
+  return `${pageHead("Administration", "Admin dashboard", "Review organizations, monitor access, and resolve concerns without exposing student information.", `<a class="button button-primary" href="#/approvals">Review organizations</a><a class="button button-light" href="#/safety">Open safety queue</a>`)}
     <section class="grid grid-4">${metric("Active students",students.length,"Demo community","var(--blue-soft)")}${metric("Verified organizations",state.users.filter((u)=>u.role==="organizer"&&u.verified).length,"Background checks tracked","var(--mint-soft)")}${metric("Open concerns",state.concerns.filter((c)=>c.status==="open").length,"Private review queue","var(--coral-soft)")}${metric("Verified hours",reportData(state).total.toFixed(2),"From all verified records","var(--yellow-soft)")}</section>
     <section class="grid grid-3" style="margin-top:17px"><article class="card span-2"><div class="card-head"><div><h2>Platform participation</h2><p>Verified volunteer hours by organization</p></div><a class="button button-link" href="#/reports">Compare organizations →</a></div>${barChart(state.users.filter(u=>u.role==="organizer").map(u=>state.hours.filter(h=>h.status==="verified"&&h.orgId===u.id).reduce((n,h)=>n+Number(h.hours),0)),state.users.filter(u=>u.role==="organizer").map(u=>u.nonprofitName))}</article><article class="card"><div class="card-head"><div><h2>Review queue</h2><p>Time-sensitive items</p></div></div><div class="quick-actions"><a class="qa" href="#/approvals"><span>◎</span><strong>${state.organizationApplications.filter((item)=>item.status==="pending").length} nonprofit applications</strong><small>Identity and policy review</small></a><a class="qa" href="#/safety"><span>!</span><strong>${state.concerns.filter((item)=>item.status==="open").length} reported concern</strong><small>Restricted details</small></a><a class="qa" href="#/people"><span>○</span><strong>Permissions audit</strong><small>Role-scoped access</small></a></div></article><article class="card span-3"><div class="card-head"><div><h2>Latest audit entries</h2><p>Who changed what and when</p></div><a class="button button-link" href="#/activity">Full history →</a></div>${activityTable(state.activity.slice(0,4))}</article></section>`;
 }
@@ -408,7 +383,7 @@ function aboutView() {
 }
 
 function accountView() {
-  return `<div class="account-wrap"><section class="account-art"><a class="brand" href="#/community"><svg viewBox="0 0 42 42" aria-hidden="true"><path d="M10 22.5 20.5 7 31 22.5 20.5 35 10 22.5Z" fill="currentColor"/><path d="m15.3 22.4 5.2-7.8 5.2 7.8-5.2 6.2-5.2-6.2Z" fill="#315ae8"/></svg>CivicShift</a><div><span class="eyebrow" style="color:var(--yellow)">Demo access</span><h1>See every side of community service.</h1><p>Use a seeded role or create a browser-local demo profile. No password is requested. Everything stays in this browser; use fictional personal details.</p></div><small>Student privacy comes first. Demo data resets anytime.</small></section><section class="account-panel"><div class="account-card"><div class="tabs"><button class="active" type="button">Quick role access</button></div><h2>Choose a demo persona</h2><div class="demo-login-personas">${state.users.map(u=>`<button type="button" class="button button-light" data-action="demo-persona" data-user="${u.id}">${esc(u.name)}<br><small>${esc(ROLE_LABELS[u.role])}</small></button>`).join("")}</div><h3>Or explore by role</h3><p style="color:var(--soft);font-size:.72rem">Each role has different navigation, data, and permissions.</p><div class="demo-role-grid">${Object.entries(ROLE_LABELS).map(([role,label])=>`<button class="demo-role" data-action="demo-role" data-role="${role}"><strong>${esc(label)}</strong><small>${role==="student"?"Discover, schedule, and track hours":role==="organizer"?"Create events and manage volunteers":role==="admin"?"Review safety and platform access":"View school-verified student hours"}</small></button>`).join("")}</div><div class="form-section" style="margin-top:22px"><h3>Create a browser-local demo account</h3><form data-form="account"><div class="form-grid"><div class="field"><label for="account-name">Name</label><input id="account-name" name="name" required maxlength="60"></div><div class="field"><label for="account-email">Email</label><input id="account-email" name="email" type="email" placeholder="student@example.org" required></div><div class="field span-2"><label for="account-role">Role</label><select id="account-role" name="role"><option value="student">Student Volunteer</option><option value="organizer">Nonprofit Organizer</option><option value="counselor">School Counselor / Teacher</option></select></div></div><button class="button button-primary" type="submit" style="margin-top:12px;width:100%">Create demo profile</button></form></div></div></section></div>`;
+  return `<div class="account-wrap"><section class="account-art"><a class="brand" href="#/community"><svg viewBox="0 0 42 42" aria-hidden="true"><path d="M10 22.5 20.5 7 31 22.5 20.5 35 10 22.5Z" fill="currentColor"/><path d="m15.3 22.4 5.2-7.8 5.2 7.8-5.2 6.2-5.2-6.2Z" fill="#315ae8"/></svg>CivicShift</a><div><span class="eyebrow" style="color:var(--yellow)">Demo access</span><h1>See every side of community service.</h1><p>Use a seeded role or create a browser-local demo profile. No password is requested. Everything stays in this browser; use fictional personal details.</p></div><small>Student privacy comes first. Demo data resets anytime.</small></section><section class="account-panel"><div class="account-card"><div class="tabs"><button class="active" type="button">Quick role access</button></div><h1>Choose a demo persona</h1><p class="demo-entry-note">Explore with fictional profiles. No password is needed; changes stay in this browser.</p><div class="demo-login-personas">${state.users.map(u=>`<button type="button" class="button button-light" data-action="demo-persona" data-user="${u.id}">${esc(u.name)}<br><small>${esc(ROLE_LABELS[u.role])}</small></button>`).join("")}</div><h3>Or explore by role</h3><p style="color:var(--soft);font-size:.72rem">Each role has different navigation, data, and permissions.</p><div class="demo-role-grid">${Object.entries(ROLE_LABELS).map(([role,label])=>`<button class="demo-role" data-action="demo-role" data-role="${role}"><strong>${esc(label)}</strong><small>${role==="student"?"Discover, schedule, and track hours":role==="organizer"?"Create events and manage volunteers":role==="admin"?"Review safety and platform access":"View school-verified student hours"}</small></button>`).join("")}</div><div class="form-section" style="margin-top:22px"><h3>Create a browser-local demo account</h3><form data-form="account"><div class="form-grid"><div class="field"><label for="account-name">Name</label><input id="account-name" name="name" required maxlength="60"></div><div class="field"><label for="account-email">Email</label><input id="account-email" name="email" type="email" placeholder="student@example.org" required></div><div class="field span-2"><label for="account-role">Role</label><select id="account-role" name="role"><option value="student">Student Volunteer</option><option value="organizer">Nonprofit Organizer</option><option value="counselor">School Counselor / Teacher</option></select></div></div><button class="button button-primary" type="submit" style="margin-top:12px;width:100%">Create demo profile</button></form></div></div></section></div>`;
 }
 
 function render() {
@@ -487,7 +462,7 @@ document.addEventListener("click",(event)=>{
   if(action==="recommendation") showToast("Demo only: no recommendation request was sent.");
   if(action==="download-data") downloadFile("civicshift-my-data.json",JSON.stringify({...studentUser(),verifiedHours:verifiedHoursFor(studentUser().id),pendingHours:state.hours.filter(h=>h.studentId===studentUser().id&&h.status==="pending").reduce((n,h)=>n+Number(h.hours),0),timeCards:state.hours.filter(h=>h.studentId===studentUser().id)},null,2),"application/json");
   if(action==="request-deletion") openConfirm("Request account deletion?","A production system would verify identity, preserve required audit records, and then remove eligible personal data.","Create request",()=>showToast("Deletion request recorded for admin review."),true);
-  if(action==="start-tour") { state.settings.tourComplete=true;saveState();showToast("Tour started: use the left navigation to explore each workflow."); }
+  if(action==="start-tour") { state.settings.tourComplete=true;saveState();showToast("Tour started: use the Menu navigation to explore each workflow."); }
   if(action==="inspect-user") { const user=getUser(target.dataset.user);openInfo("Access review",user.name,`${ROLE_LABELS[user.role]} · ${user.email}. Permissions are limited to this role’s records.`); }
   if(action==="map-event") location.hash=`#/event/${target.dataset.event}`;
 });
@@ -506,7 +481,7 @@ document.addEventListener("submit",(event)=>{
   if(kind==="absence-appeal"){runDomainAction({type:"absence-appeal",absenceId:String(data.get("absenceId")),explanation:String(data.get("explanation"))});return;}
   if(kind==="resolve-absence"){confirmDomain("Finalize this absence review?",{type:"resolve-absence",absenceId:String(data.get("absenceId")),outcome:String(data.get("outcome")),reason:String(data.get("reason"))},"An unexcused outcome deducts 5 reputation points. Excused outcomes remove any previous deduction. Your reason is recorded.");return;}
   if(kind==="correct-hour"){confirmDomain("Correct this time card?",{type:"correct-hour",hourId:String(data.get("hourId")),status:String(data.get("status")),reason:String(data.get("reason"))},"Hours, reputation, quest progress, and school totals will update from the corrected evidence.");return;}
-  if(kind==="feed-filter"){ui.feedSearch=String(data.get("search")).trim();ui.feedCause=String(data.get("cause"));render();return;}
+  if(kind==="feed-filter"){ui.feedSearch=String(data.get("search")).trim();ui.feedCause=String(data.get("cause"));render();document.querySelector("#feed-search")?.focus({preventScroll:true});return;}
   if(kind==="clock"){runDomainAction({type:"clock",value:String(data.get("value"))});return;}
   if(kind==="filters"){ui.search=String(data.get("search")||"").trim();ui.category=String(data.get("category"));ui.location=String(data.get("location"));ui.availability=String(data.get("availability"));ui.sort=String(data.get("sort"));ui.dateRange=String(data.get("dateRange")||"all");render();return;}
   if(kind==="profile"){
@@ -564,11 +539,16 @@ function openGoogleCalendar(){const next=state.signups.filter(s=>s.studentId===s
 
 document.addEventListener("click",event=>{
   const tab=event.target.closest("[data-feed-tab]");if(tab){ui.feedTab=tab.dataset.feedTab;render();document.querySelector(`[data-feed-tab="${ui.feedTab}"]`)?.focus();}
-  const save=event.target.closest("[data-save-story]");if(save){const id=save.dataset.saveStory,key=studentUser().id,ids=state.savedStories[key]||[];state.savedStories[key]=ids.includes(id)?ids.filter(v=>v!==id):[...ids,id];saveState();render();document.querySelector(`[data-save-story="${id}"]`)?.focus();}
+  const save=event.target.closest("[data-save-story]");if(save){const id=save.dataset.saveStory,key=studentUser().id,ids=state.savedStories[key]||[];state.savedStories[key]=ids.includes(id)?ids.filter(v=>v!==id):[...ids,id];saveState();render();(document.querySelector(`[data-save-story="${id}"]`)||document.querySelector('[data-feed-tab="saved"]'))?.focus({preventScroll:true});}
   const story=event.target.closest("[data-story-status]");if(story)runDomainAction({type:"story-status",storyId:story.dataset.storyStatus,status:story.dataset.status});
   if(event.target.closest(".skip-link")){event.preventDefault();document.querySelector("#workspace")?.focus();}
 });
-document.addEventListener("keydown",event=>{if(event.key==="Escape"&&document.querySelector(".sidebar.open")){document.querySelector(".sidebar").classList.remove("open");const toggle=document.querySelector("[data-action=toggle-sidebar]");toggle?.setAttribute("aria-expanded","false");toggle?.focus();}});
+document.addEventListener("keydown",event=>{
+  if(event.key!=="Escape")return;
+  const opened=document.querySelector(".portal-menu[open], .alerts-menu[open]");
+  if(opened){opened.open=false;opened.querySelector("summary")?.focus();}
+});
+document.addEventListener("click",event=>{document.querySelectorAll(".portal-menu[open], .alerts-menu[open]").forEach(menu=>{if(!menu.contains(event.target))menu.open=false;});});
 window.addEventListener("hashchange",()=>{render();document.querySelector("#workspace")?.focus({preventScroll:true});window.scrollTo({top:0,behavior:"instant"});});
 window.addEventListener("storage",event=>{if(event.key===STORAGE_KEY){state=loadState();render();}});
 installAssistant({getState:()=>state,runAction:runDomainAction});

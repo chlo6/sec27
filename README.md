@@ -10,7 +10,15 @@ npm run preview
 
 Open **http://127.0.0.1:4173**. Requires Python 3; no installation or build step is needed. Alternatively run `python3 -m http.server 4173 --bind 127.0.0.1 --directory dist`.
 
-The homepage opens the community feed. `portal.html` still opens the dashboard, and existing hash routes remain available, such as `portal.html#/event/evt-garden`. Serve over HTTP; ES modules do not work reliably with `file://`.
+The homepage opens the community quest board. `portal.html` still opens the dashboard, and existing hash routes remain available, such as `portal.html#/event/evt-garden`. Serve over HTTP; ES modules do not work reliably with `file://`.
+
+## Minimal quest-board interface
+
+The `codex/civicshift-minimal-quests` branch presents community needs as broad paper-like quest cards, with readable descriptions, dates, available places, and links to the existing opportunity flows. Thin rules, folded corners, and original SVG stamps give the board a restrained parchment feel. Black and white remain the base palette, with blue accents and a faint warm-white paper surface.
+
+Georgia system-serif headings pair with Manrope body text and controls. The native **Menu** disclosure replaces the permanent sidebar; role and persona controls remain available. Personal quests and the calendar sit in expandable sections after the feed, keeping the first screen focused on discovery. Verified hours and reputation remain visibly separate.
+
+This is a presentation update: saved data, matching, registration, waitlist offers, approval, attendance, verification, exports, and the four-role workflows retain their existing rules. Design references and original-asset credits are documented in [SOURCES.md](SOURCES.md).
 
 ## What's included
 
@@ -21,7 +29,7 @@ The homepage opens the community feed. `portal.html` still opens the dashboard, 
 - **In-app reminders** evaluated on load or demo clock change within 24 hours before an approved shift. Email/SMS controls are simulations. Google Calendar links and Apple/Outlook ICS downloads are additions/exports, not continuous sync.
 
 - A community needs feed with search, causes, **For You / Latest / Saved**, recommendation explanations, six fictional stories, ten events, and fourteen shifts.
-- Manrope typography, the team-requested black/white/blue palette, four roles, onboarding, dashboards, calendars, notifications, portfolios, reports, and CSV/ICS exports.
+- Georgia serif headings and Manrope interface text, the team-requested black/white/blue palette, four roles, onboarding, dashboards, calendars, notifications, portfolios, reports, and CSV/ICS exports.
 - Role and persona selectors for all seeded students and organizers. Admins manage all events and publish/hide stories; organizers manage their own events. Counselors have a school-scoped view.
 - A keyboard-accessible **Demo assistant**. Try “Find Saturday shifts,” “Explain matches,” “Check conflicts,” “Hours remaining,” or “Cancel a signup.” It proposes registration changes for explicit confirmation and rechecks current state at confirmation.
 - Shared rules for registration, conflicts, eligibility, capacity, waitlist offers, attendance, hour verification, and activity history.
@@ -65,7 +73,7 @@ Unreadable or unsupported future-version storage is not silently replaced. Expor
 npm test
 ```
 
-Uses Node's built-in test runner (Node 20+), with no packages to install. See [verification results](docs/VERIFICATION.md) and [implementation plan](docs/IMPLEMENTATION_PLAN.md).
+Uses Node's built-in test runner (Node 20+), with no packages to install. The automated suite has 39 passing tests. See [verification results](docs/VERIFICATION.md) and [implementation plan](docs/IMPLEMENTATION_PLAN.md) for verification scope and walkthroughs.
 
 ## Source map
 
@@ -77,6 +85,8 @@ Uses Node's built-in test runner (Node 20+), with no packages to install. See [v
 | `dist/domain.js` | Shared validation, transactional actions, recommendations, verified totals/exports |
 | `dist/game.js`, `dist/game-ui.js`, `dist/game.css` | Reputation ledger, quests, teams, reminders, and game views |
 | `dist/community.js`, `dist/community.css` | Feed, story controls, navigation, assistant and responsive styling |
+| `dist/minimal.css` | Minimal quest-board layout, typography, paper surfaces, menu, and responsive overrides |
+| `dist/quest-cards.css` | Personal achievement cards, progress presentation, dark mode, and reduced-motion styling |
 | `dist/assistant.js` | Deterministic intent matching and confirmation drawer |
 | `dist/data.js`, `dist/community-data.js` | Fictional original and additional records |
 | `tests/*.test.js` | Migration, service workflows, permissions, reputation, codes, reminders, game views and assistant tests |

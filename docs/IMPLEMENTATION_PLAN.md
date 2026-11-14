@@ -47,3 +47,16 @@ Four record-derived quests award badges: First Step (one verified completed shif
 Retain the original registration/attendance/report tests and add migration, scoring/reversal, reminders, code validation/lockout, per-user preferences, privacy, team and assistant tests. Exercise the end-to-end flow across four roles and inspect desktop/tablet/mobile layouts, labels, focus, history/deep links and reduced-motion rules. Record actual results in VERIFICATION.md.
 
 Before editing, fetched remote changes, fast-forwarded local main, created `codex/civicshift-game-demo` from main, and incorporated the original prototype branch. The inspected remote main was `81d3443`; prototype baseline was `93d8846`. Deliver a local preview and commit/push the feature branch only. Do not force-push, merge into main, or modify hosting.
+
+
+## Minimal quest-board UI — November 14, 2026
+
+Implemented on `codex/civicshift-minimal-quests`, based on game-demo commit `6586743`. Fetched remote main (`ecacbf3`) before editing. Main has independent portal changes, so this branch retains the working prototype and carries forward its simpler header intent, notification preview, theme control, and login shortcut without replacing shared domain modules. Main remains unchanged.
+
+- Use one community quest board with wide paper cards, restrained folded corners, original blue SVG stamps, dark text, and warm-white surfaces.
+- Pair system Georgia display headings with Manrope controls. Remove decorative feed banners and the permanent dashboard sidebar; use an accessible native Menu for all role tools.
+- Keep hours, reputation, and approved commitments separate in a compact service strip. Put personal quest details and calendars in expandable sections; retain dedicated progress and dashboard routes.
+- Preserve search, cause filtering, For You/Latest/Saved views, recommendation explanations, event links, confirmed signup actions, all four roles, and saved state.
+- Scope notification previews to the active user and hide student-only personal summaries in staff views.
+- Refresh changed script/style URLs so an existing preview loads the redesign without clearing local records.
+- Verify existing tests and representative responsive, keyboard, navigation and theme flows; commit and push the feature branch. Hosting remains unchanged.

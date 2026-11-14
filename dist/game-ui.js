@@ -5,7 +5,7 @@ const bar = (n,total,label) => `<div class="progress" role="progressbar" aria-la
 const head = (eyebrow,title,copy) => `<div class="page-head"><div><span class="eyebrow">${x(eyebrow)}</span><h1>${x(title)}</h1><p>${x(copy)}</p></div></div>`;
 const student = (s,id) => s.users.find(u=>u.id===id);
 export function questCards(s,id,compact=false) {
-  return `<div class="quest-list ${compact?'compact':''}">${quests(s,id).map(q=>`<article class="quest ${q.complete?'earned':''}"><span class="quest-mark" aria-hidden="true">${q.complete?'✓':'◇'}</span><div><h3>${x(q.title)}</h3><p>${x(q.description)}</p>${bar(q.current,q.target,q.title)}<small>${Math.min(q.current,q.target)} / ${q.target} · ${q.complete?'Badge earned':'In progress'}</small></div></article>`).join('')}</div>`;
+  return `<div class="quest-list ${compact?'compact':''}">${quests(s,id).map((q,index)=>`<article class="quest ${q.complete?'earned':''}"><span class="quest-mark" aria-hidden="true">${q.complete?'✓':'◇'}</span><div class="quest-copy"><div class="quest-heading"><span class="quest-number">Quest ${String(index+1).padStart(2,'0')}</span><span class="quest-state">${q.complete?'Badge earned':'In progress'}</span></div><h3>${x(q.title)}</h3><p>${x(q.description)}</p><div class="quest-progress">${bar(q.current,q.target,q.title)}<small><strong>${Math.min(q.current,q.target)}</strong> / ${q.target}</small></div></div></article>`).join('')}</div>`;
 }
 export function teamCard(s,id) {
   const t=schoolTeam(s,id);

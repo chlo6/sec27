@@ -1,0 +1,109 @@
+/* Personal achievements read as wide paper notes, not miniature app screens. */
+.game-progress-layout {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
+}
+
+.quest-list,
+.game-progress-layout .quest-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.quest {
+  --quest-paper: #fcfbf7;
+  --quest-line: #d8d8cf;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 27px;
+  border: 1px solid var(--quest-line);
+  border-radius: 2px;
+  background: var(--quest-paper);
+  box-shadow: 0 3px 0 -1px var(--quest-paper), 0 3px 0 var(--quest-line);
+}
+
+.quest::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--quest-line);
+  opacity: .48;
+  pointer-events: none;
+}
+
+.quest::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 17px;
+  height: 17px;
+  background: linear-gradient(45deg, #e6e5de 49%, var(--paper) 51%);
+  border-bottom: 1px solid var(--quest-line);
+  border-left: 1px solid var(--quest-line);
+  pointer-events: none;
+}
+
+.quest .quest-mark {
+  display: grid;
+  place-items: center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  margin-top: 31px;
+  border: 1px solid var(--blue);
+  border-radius: 2px;
+  color: var(--blue);
+  background: transparent;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.quest-copy { min-width: 0; flex: 1; }
+.quest-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 14px; margin-bottom: 14px; }
+.quest-number { color: var(--soft); font-size: 10px; line-height: 1.5; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.quest-state { color: var(--soft); font-size: 11px; line-height: 1.5; }
+.quest h3 { margin: 0; color: var(--ink); font-family: Georgia, 'Times New Roman', serif; font-size: 24px; line-height: 1.2; letter-spacing: -.025em; font-weight: 400; }
+.quest p { display: block; margin: 10px 0 22px; color: var(--soft); font-size: 13px; line-height: 1.65; }
+.quest-progress { display: flex; align-items: center; gap: 14px; }
+.quest .progress { flex: 1; height: 4px; margin: 0; border-radius: 0; background: #dce0e5; }
+.quest .progress > span { border-radius: 0; }
+.quest small { flex-shrink: 0; display: block; margin: 0; color: var(--soft); font-size: 12px; font-variant-numeric: tabular-nums; }
+.quest small strong { color: var(--ink); font-weight: 600; }
+.quest.earned { border-color: var(--quest-line); background: var(--quest-paper); }
+.quest.earned .quest-mark { color: #fff; background: var(--blue-button); }
+.quest.earned .quest-state { color: var(--blue); font-weight: 700; }
+
+.quest-list.compact { grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 18px; }
+.compact .quest { gap: 14px; padding: 22px; }
+.compact .quest-heading { margin-bottom: 10px; }
+.compact .quest .quest-mark { flex-basis: 28px; width: 28px; height: 28px; margin-top: 29px; font-size: 18px; }
+.compact .quest h3 { font-size: 21px; }
+.compact .quest p { display: block; margin: 8px 0 16px; font-size: 12px; }
+.compact .quest .progress { margin-top: 0; }
+
+body.dark .quest,
+body.dark .quest.earned {
+  --quest-paper: #20211f;
+  --quest-line: #45473f;
+  background: var(--quest-paper);
+  border-color: var(--quest-line);
+}
+body.dark .quest::after { background: linear-gradient(45deg, #3b3d36 49%, var(--paper) 51%); }
+body.dark .quest .progress { background: #434744; }
+
+@media (max-width: 700px) {
+  .quest-list,
+  .game-progress-layout .quest-list { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .quest { gap: 16px; padding: 25px 22px; }
+  .quest h3 { font-size: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quest,
+  .quest * { animation: none !important; transition: none !important; }
+}

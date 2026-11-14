@@ -1,0 +1,5 @@
+/* Preserve vertical page scrolling and pinch zoom while recognizing view swipes. */
+[data-opportunity-swipe] { touch-action:pan-y pinch-zoom; }
+[data-opportunity-swipe][data-opportunity-swiping] { user-select:none; -webkit-user-select:none; cursor:grabbing; }
+
+.swipe-hint { margin:0 0 16px; font-size:12px; color:var(--soft); }

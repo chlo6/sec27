@@ -14,7 +14,7 @@ This phase extends the original buildless HTML/CSS/ES-module prototype. It prese
 
 - Feed first: community stories plus distinct hour/reputation cards, personal quests, school-team progress, commitments, and a seven-day opportunity view.
 - Discovery: preserve search, categories, location, availability and sorting; add a seven-day date filter and keep capacity/eligibility visible.
-- Demo login: choose a persona or create a local profile without passwords. Onboarding/profile cover birth date, school, interests, skills, availability, location, languages, optional emergency contact, alias, team and notification preferences.
+- Prototype login: enter fixed shared test credentials to open a role dashboard. Sign out before switching accounts. Onboarding/profile cover birth date, school, interests, skills, availability, location, languages, optional emergency contact, alias, team and notification preferences.
 - Waitlists: cancellation offers the freed place to the next eligible volunteer; acceptance rechecks the current rules. There is no surprise auto-registration.
 - Calendar: Google add-event links and Apple/Outlook-compatible ICS exports; these are not live synchronization.
 - Progress: personal quests and optional school cooperation; the school leaderboard is opt-in and uses aliases, equal ranks for ties, and reputation rather than hours.
@@ -80,3 +80,10 @@ Use direct page names and task descriptions: Quests, Opportunities, Dashboard, a
 ## Opportunities calendar and public subscription
 
 Add the `#/explore/calendar` view with month deep links, shared filters, per-shift capacity/eligibility checks, new-post labels, and a mobile agenda. Preserve the personal registration calendar. Publish `dist/opportunities.ics` from committed fictional event sources only; never upload browser-local records. Generate stable per-shift entries in Pacific time, converted to UTC, with cancellation support and safe iCalendar formatting. Offer copy-link, Google From URL instructions, and one-time file download. Regenerate the feed during Pages deployment. A Google-hosted calendar, account authorization, and publication of browser-only organizer edits remain outside this static release.
+
+
+## Fixed test accounts and opportunity gestures
+
+Replace the role/persona dropdowns with a username/password form backed by seven public test accounts. Store identity only in a tab session, restore that identity after reading shared state, require sign-in before portal screens/actions, and reject stale proposals from another account. Keep source-level demo/privacy boundaries explicit; production authentication remains deferred.
+
+Support horizontal swipes between Cards, Calendar, and Map with a distance/direction threshold, bounded navigation, and canceled/multitouch protection. Keep vertical scrolling, pinch zoom, form controls, and normal link taps intact. Retain visible tab links as the accessible navigation alternative.

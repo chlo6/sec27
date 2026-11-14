@@ -100,3 +100,12 @@ All 51 tests pass. New coverage includes individual-shift filtering/capacity, mo
 Browser checks: desktop month grid and mobile date list, no horizontal page overflow at checked sizes, category filtering, month navigation, Back/Forward and reload on a month URL, and successful copy-link with the exact public URL on the clipboard. Google setup link targets the official From URL page. Existing personal-calendar exports remain separate.
 
 The integration publishes a standards-based public feed. No Google account was connected or modified; adding it to a user's Google Calendar and Google's refresh schedule remain provider-side steps. Events retain fictional October–November 2026 demo dates.
+
+
+## Test-account sign-in and swipe navigation — November 14, 2026
+
+All 72 tests pass. Nine account tests cover all seven fixed profiles, invalid credentials, normalized usernames, exact password matching, missing users/changed roles, tab-session reload, sign-out, malformed sessions, storage failures, isolated sessions, and absence of password persistence. Twelve gesture tests cover both directions, edge stops, movement thresholds, vertical/diagonal scrolls, cancellation, multitouch, control/scroll-area exclusions, linked-card click suppression, mouse drag, rerenders, and cleanup.
+
+Browser verification confirmed invalid-password feedback, student/admin/organizer/counselor dashboards, sign-out, reload persistence, calendar deep-link continuation, and separate student/admin sessions across two tabs. Native horizontal drags switched Cards → Calendar → Map and back. Vertical page scrolling remained available; a mobile layout check found no horizontal overflow. Native touchscreen hardware was not separately available; touch/pen paths are covered by the gesture tests.
+
+The site now uses public fixed test credentials instead of role/persona dropdowns. This remains a client-side prototype, not secure authentication. Shared fictional service records remain in localStorage, while each tab stores its selected identity in sessionStorage. Entered passwords are not persisted by the app.

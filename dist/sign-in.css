@@ -1,0 +1,37 @@
+.sign-in-header { max-width:1160px; margin:auto; padding:30px 28px; border-bottom:1px solid var(--line); }
+.sign-in-header .community-brand { display:inline-flex; align-items:center; }
+.sign-in-layout { max-width:520px; padding:56px 24px 80px; margin:auto; }
+.sign-in-card h1 { font-family:Georgia,serif; font-weight:400; font-size:48px; letter-spacing:-.035em; margin:0 0 14px; }
+.sign-in-card>p { font-size:14px; color:var(--soft); line-height:1.7; margin:0 0 28px; }
+.sign-in-card form { display:grid; gap:20px; }
+.sign-in-card .field label { font-size:13px; margin-bottom:9px; }
+.sign-in-card input { min-height:50px; font-size:15px; border-radius:3px; background:var(--paper); }
+.password-field { display:flex; border:1px solid var(--line); background:var(--paper); border-radius:3px; }
+.password-field input { min-width:0; flex:1; border:0; }
+.password-toggle { border:0; border-left:1px solid var(--line); padding:0 16px; min-width:64px; color:var(--soft); background:transparent; font-size:12px; cursor:pointer; }
+.sign-in-submit { width:100%; min-height:50px; }
+.login-error { margin:0; font-size:13px; line-height:1.6; color:var(--ink); }
+.login-error:empty { display:none; }
+.sign-in-card .sign-in-note { font-size:12px; line-height:1.7; margin:22px 0 30px; }
+.test-accounts { border-top:1px solid var(--line); font-size:13px; }
+.test-accounts summary { cursor:pointer; padding:17px 0; font-weight:600; }
+.test-accounts p { margin:0 0 12px; }
+.test-accounts dl { margin:0; }
+.test-accounts dl>div { display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:10px 0; border-top:1px solid var(--line); }
+.test-accounts dt { color:var(--soft); }
+.test-accounts dd { margin:0; }
+.test-accounts code { padding:3px 6px; background:var(--blue-soft); color:var(--ink); font-size:12px; }
+.test-accounts>details { margin-top:8px; }
+.account-identity { display:grid; gap:3px; }
+.account-identity strong { font-size:12px; font-weight:600; }
+.account-identity span { font-size:10px; color:var(--soft); }
+.sign-out { padding:9px 12px; border:1px solid var(--line); border-radius:3px; font:inherit; font-size:12px; color:var(--ink); background:transparent; cursor:pointer; min-height:40px; }
+@media(max-width:600px) {
+  .sign-in-header { padding:22px; }
+  .sign-in-layout { padding-top:36px; }
+  .sign-in-card h1 { font-size:40px; }
+  .notebook-shell .topbar-actions { gap:10px; }
+  .account-identity { max-width:135px; }
+  .account-identity strong { overflow-wrap:anywhere; }
+  .account-identity span { font-size:9px; }
+}

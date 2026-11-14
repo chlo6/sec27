@@ -42,13 +42,31 @@ npm run preview
 
 Open **http://127.0.0.1:4173**. Requires Python 3; no installation or build step is needed. Alternatively run `python3 -m http.server 4173 --bind 127.0.0.1 --directory dist`.
 
-The homepage opens the community quest board. `portal.html` still opens the dashboard, and existing hash routes remain available, such as `portal.html#/event/evt-garden`. Serve over HTTP; ES modules do not work reliably with `file://`.
+The site opens a sign-in form when this tab has no session. Signing in opens the account dashboard, or continues to an allowed deep link such as `portal.html#/event/evt-garden`. Serve over HTTP; ES modules do not work reliably with `file://`.
+
+## Test accounts and sign-in
+
+All accounts use the public test password **`password123`**. Use **Sign out** to change accounts.
+
+| Username | Role | Profile |
+| --- | --- | --- |
+| `user123` | Student | Maya Chen |
+| `organizer123` | Organizer | Nina Alvarez |
+| `admin123` | Admin | Avery Morgan |
+| `counselor123` | Counselor | Dr. Lena Morris |
+| `user456` | Student | Jordan Patel |
+| `user789` | Student | Eli Brooks |
+| `organizer456` | Organizer | Marcus Lee |
+
+The sign-in form rejects incorrect credentials and opens the account's permitted screens. The tab session survives reloads and is cleared by Sign out. This is a prototype role-selection flow, not real authentication: credentials and all fictional records are client-side. The app stores only the account identity in sessionStorage, never the entered password. Saved service records stay in localStorage. No real account or private data should depend on these checks.
+
+In Opportunities, swipe left for **Cards → Calendar → Map**, or right to go back. Swipes stop at the first/last view. Vertical scrolling and pinch zoom remain available; the tabs also work with clicks and keyboard navigation.
 
 ## Minimal quest-board interface
 
 The interface, now merged into `main`, presents community needs as broad paper-like quest cards, with readable descriptions, dates, available places, and links to the existing opportunity flows. Thin rules, folded corners, and original SVG stamps give the board a restrained parchment feel. Black and white remain the base palette, with blue accents and a faint warm-white paper surface.
 
-Georgia system-serif headings pair with Manrope body text and controls. The native **Menu** disclosure replaces the permanent sidebar; role and persona controls remain available. Personal quests and the calendar sit in expandable sections after the feed, keeping the first screen focused on discovery. Verified hours and reputation remain visibly separate.
+Georgia system-serif headings pair with Manrope body text and controls. The native **Menu** disclosure replaces the permanent sidebar; the signed-in name, role, and Sign out control replace the role picker. Personal quests and the calendar sit in expandable sections after the feed, keeping the first screen focused on discovery. Verified hours and reputation remain visibly separate.
 
 This is a presentation update: saved data, matching, registration, waitlist offers, approval, attendance, verification, exports, and the four-role workflows retain their existing rules. Design references and original-asset credits are documented in [SOURCES.md](SOURCES.md).
 
@@ -57,19 +75,19 @@ This is a presentation update: saved data, matching, registration, waitlist offe
 - **Hours and reputation are separate.** Hours are verified time; reputation records reliable participation and contribution, and also grows with participation. Earn 10 for confirmed verified completion, 2 for advance readiness, and 3 for organizer-confirmed tasks. Only an admin-reviewed unexcused absence deducts 5; appeals and corrections are auditable.
 - **Progress and school cooperation:** four personal quest badges, an opt-in 20-hour weekly school goal, and an opt-in alias-based reputation leaderboard. Badges, email opens, reviews and hourly duration add no reputation.
 - **Working demo attendance codes:** six digits per shift, ten-minute expiry, rotation, five-attempt session lockout, and student entry. Check-in does not establish verified hours; organizer checkout, verification and completion assessment still matter.
-- **Demo login and profile:** persona selection or local account creation without passwords; school, birth date, interests, skills, availability, city, language preferences, optional emergency contact and per-user notification settings.
+- **Prototype login and profile:** fixed test usernames open the corresponding role; school, birth date, interests, skills, availability, city, language preferences, optional emergency contact and per-user notification settings.
 - **In-app reminders** evaluated on load or demo clock change within 24 hours before an approved shift. Email/SMS controls are simulations. Google Calendar links and Apple/Outlook ICS downloads are additions/exports, not continuous sync.
 
 - A community needs feed with search, causes, **For You / Latest / Saved**, recommendation explanations, six fictional stories, ten events, and fourteen shifts.
 - Georgia serif headings and Manrope interface text, the team-requested black/white/blue palette, four roles, onboarding, dashboards, calendars, notifications, portfolios, reports, and CSV/ICS exports.
-- Role and persona selectors for all seeded students and organizers. Admins manage all events and publish/hide stories; organizers manage their own events. Counselors have a school-scoped view.
+- Username/password entry for all seven seeded profiles. Admins manage all events and publish/hide stories; organizers manage their own events. Counselors have a school-scoped view.
 - A keyboard-accessible **Demo assistant**. Try “Find Saturday shifts,” “Explain matches,” “Check conflicts,” “Hours remaining,” or “Cancel a signup.” It proposes registration changes for explicit confirmation and rechecks current state at confirmation.
 - Shared rules for registration, conflicts, eligibility, capacity, waitlist offers, attendance, hour verification, and activity history.
 - A saved demo clock for attendance walkthroughs. Check in during a shift, advance time, then check out. Each registration creates one pending time card. Verified records alone count toward progress and reports.
 
 ## Gamified walkthrough
 
-Use fictional demo personas; do not enter real private data. `#/login` offers persona entry, `#/progress` shows private progress, and `#/leaderboard` shows opted-in students from the same school.
+Use fictional demo personas; do not enter real private data. `#/login` offers username/password entry, `#/progress` shows private progress, and `#/leaderboard` shows opted-in students from the same school.
 
 1. As **Maya Chen**, open Community Garden Crew. Her **Setup** registration is already approved. Confirm readiness before October 17 at 08:00. In Profile, optionally join the school team and opt into the leaderboard with an alias.
 2. Switch to **Nina Alvarez / Nonprofit Organizer**. In the roster, advance the demo clock to **2026-10-17 08:00** and generate a Setup code.
@@ -81,7 +99,7 @@ Use fictional demo personas; do not enter real private data. `#/login` offers pe
 
 ## Existing service walkthrough
 
-1. As **Student Volunteer / Maya Chen**, open the reading story in Community. Choose **A little reading goes a long way**, request its shift, and confirm. Or ask the assistant to find shifts and review that signup.
+1. As **Student Volunteer / Maya Chen**, open the reading story in Community. Choose **Reading support**, request its shift, and confirm. Or ask the assistant to find shifts and review that signup.
 2. Switch to **Nonprofit Organizer / Marcus Lee**. Open **Approvals** and approve Maya's reading request.
 3. Open **Check-in & roster**, select the reading event, and advance the demo clock to **2026-10-28 15:30**. Check Maya in.
 4. Advance to **2026-10-28 17:30**, then check her out. A **2.00-hour pending** time card appears.
@@ -105,7 +123,7 @@ Unreadable or unsupported future-version storage is not silently replaced. Expor
 npm test
 ```
 
-Uses Node's built-in test runner (Node 20+), with no packages to install. The automated suite has 51 passing tests. See [verification results](docs/VERIFICATION.md) and [implementation plan](docs/IMPLEMENTATION_PLAN.md) for verification scope and walkthroughs.
+Uses Node's built-in test runner (Node 20+), with no packages to install. The automated suite has 72 passing tests. See [verification results](docs/VERIFICATION.md) and [implementation plan](docs/IMPLEMENTATION_PLAN.md) for verification scope and walkthroughs.
 
 ## Source map
 

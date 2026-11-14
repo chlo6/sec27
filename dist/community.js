@@ -5,7 +5,7 @@ export const escapeHTML = (v = "") => String(v).replace(/[&<>"']/g, c => ({"&":"
 const x = escapeHTML;
 export function commonNav(role, route) {
   const links = [["community","Quests"],["explore","Opportunities"],["dashboard","Dashboard"],...(role === "student" ? [["progress","Progress"]] : [])];
-  return `<nav class="community-nav" aria-label="Primary"><a class="community-brand" href="#/community"><span class="brand-mark" aria-hidden="true">✳</span> CivicShift<span class="demo-badge">DEMO</span></a><div class="primary-links">${links.map(([id,label])=>`<a href="#/${id}" ${route===id?'aria-current="page"':""}>${label}</a>`).join("")}</div><button class="button assistant-launch" type="button" data-assistant-open><span aria-hidden="true">✧</span> Demo assistant</button></nav>`;
+  return `<nav class="community-nav" aria-label="Primary"><a class="community-brand" href="#/community"><span class="brand-mark" aria-hidden="true">✳</span> CivicShift</a><div class="primary-links">${links.map(([id,label])=>`<a href="#/${id}" ${route===id?'aria-current="page"':""}>${label}</a>`).join("")}</div><button class="button assistant-launch" type="button" data-assistant-open><span aria-hidden="true">✧</span> Demo assistant</button></nav>`;
 }
 export function visibleStories(state, ui, student) {
   const saved = state.savedStories[student.id] || [];

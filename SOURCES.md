@@ -47,3 +47,8 @@ All new quest icons, badges, game layouts and fictional examples are original HT
 
 - [Google Calendar Help: Add a public calendar by URL](https://support.google.com/calendar/answer/37100?hl=en), checked November 14, 2026. Informed the computer-browser subscription steps and Google setup link. CivicShift is not affiliated with Google.
 - [RFC 5545: iCalendar](https://www.rfc-editor.org/rfc/rfc5545), checked November 14, 2026. Informed original serializer implementation: stable event identifiers, UTC timestamps, text escaping, line folding, and CRLF. No calendar library or external script is bundled.
+
+
+## Gesture interaction
+
+- [W3C Pointer Events](https://www.w3.org/TR/pointerevents/latest/) and [MDN touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/touch-action), checked November 14, 2026. Informed original swipe handling and preservation of vertical scrolling and pinch zoom. No gesture library is bundled.

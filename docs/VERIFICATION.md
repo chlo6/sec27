@@ -91,3 +91,12 @@ Replaced decorative copy with direct page labels, activity titles, descriptions,
 All 40 tests pass, including the new saved-copy refresh and reload check. Diff whitespace checks pass. Local browser checks confirmed the updated feed and Progress page, keyboard link navigation, and the shorter quest descriptions.
 
 GitHub Pages is now enabled and the initial deployment succeeded. Both public entry pages and all seven directly referenced CSS/JavaScript assets returned HTTP 200. Main pushes automatically run tests and publish the site.
+
+
+## Opportunities calendar — November 14, 2026
+
+All 51 tests pass. New coverage includes individual-shift filtering/capacity, month/year navigation, new-post dates, HTML escaping, empty months, all 14 published shifts, stable calendar IDs, Pacific daylight-saving conversion, cancellation, UTC timestamps, text injection/UTF-8 folding, CRLF, overnight shifts, exclusion of private fields, and reproducible generation. Feed tests also pass with the host timezone set to Asia/Tokyo.
+
+Browser checks: desktop month grid and mobile date list, no horizontal page overflow at checked sizes, category filtering, month navigation, Back/Forward and reload on a month URL, and successful copy-link with the exact public URL on the clipboard. Google setup link targets the official From URL page. Existing personal-calendar exports remain separate.
+
+The integration publishes a standards-based public feed. No Google account was connected or modified; adding it to a user's Google Calendar and Google's refresh schedule remain provider-side steps. Events retain fictional October–November 2026 demo dates.

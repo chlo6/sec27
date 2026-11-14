@@ -30,6 +30,9 @@ jobs:
           package-manager-cache: false
 
       # The app is buildless and has no package dependencies to install.
+      - name: Generate the public opportunities calendar
+        run: npm run generate:calendar
+
       - name: Run regression tests
         run: npm test
 

@@ -1,0 +1,261 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//CivicShift//Fictional opportunities//EN
+CALSCALE:GREGORIAN
+X-WR-CALNAME:CivicShift fictional demo opportunities
+X-WR-TIMEZONE:America/Los_Angeles
+X-WR-CALDESC:Fictional demo opportunities. Adding this calendar does not si
+ gn you up.
+BEGIN:VEVENT
+UID:evt-garden/sh-garden-setup@civicshift.chlo6.github.io
+DTSTAMP:20261006T070000Z
+LAST-MODIFIED:20261006T070000Z
+DTSTART:20261017T150000Z
+DTEND:20261017T170000Z
+SUMMARY:[Demo] Community Garden Crew — Setup
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nPlant fall seedlings\, refresh accessible garden bed
+ s\, and prepare produce boxes for neighborhood families.\n\nOrganization: 
+ Greenway Collective\n\nShift: Setup\n\nTimes use America/Los_Angeles.\n\nR
+ eview details and register in CivicShift: https://chlo6.github.io/sec27/po
+ rtal.html#/event/evt-garden
+LOCATION:Riverside Community Garden\, 240 River Street\, Riverside
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-garden
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-garden/sh-garden-main@civicshift.chlo6.github.io
+DTSTAMP:20261006T070000Z
+LAST-MODIFIED:20261006T070000Z
+DTSTART:20261017T170000Z
+DTEND:20261017T200000Z
+SUMMARY:[Demo] Community Garden Crew — Garden crew
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nPlant fall seedlings\, refresh accessible garden bed
+ s\, and prepare produce boxes for neighborhood families.\n\nOrganization: 
+ Greenway Collective\n\nShift: Garden crew\n\nTimes use America/Los_Angeles
+ .\n\nReview details and register in CivicShift: https://chlo6.github.io/se
+ c27/portal.html#/event/evt-garden
+LOCATION:Riverside Community Garden\, 240 River Street\, Riverside
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-garden
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-garden/sh-garden-clean@civicshift.chlo6.github.io
+DTSTAMP:20261006T070000Z
+LAST-MODIFIED:20261006T070000Z
+DTSTART:20261017T200000Z
+DTEND:20261017T220000Z
+SUMMARY:[Demo] Community Garden Crew — Cleanup
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nPlant fall seedlings\, refresh accessible garden bed
+ s\, and prepare produce boxes for neighborhood families.\n\nOrganization: 
+ Greenway Collective\n\nShift: Cleanup\n\nTimes use America/Los_Angeles.\n\
+ nReview details and register in CivicShift: https://chlo6.github.io/sec27/
+ portal.html#/event/evt-garden
+LOCATION:Riverside Community Garden\, 240 River Street\, Riverside
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-garden
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-math/sh-math@civicshift.chlo6.github.io
+DTSTAMP:20260928T070000Z
+LAST-MODIFIED:20260928T070000Z
+DTSTART:20261021T223000Z
+DTEND:20261022T003000Z
+SUMMARY:[Demo] After-School Math Lab — Tutoring session
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nSupport middle school students with homework in a we
+ lcoming\, team-based study session.\n\nOrganization: Bridge Learning Cente
+ r\n\nShift: Tutoring session\n\nTimes use America/Los_Angeles.\n\nReview d
+ etails and register in CivicShift: https://chlo6.github.io/sec27/portal.ht
+ ml#/event/evt-math
+LOCATION:Central Library\, 88 Main Avenue\, Downtown
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-math
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-creek/evt-creek-shift-1@civicshift.chlo6.github.io
+DTSTAMP:20261010T070000Z
+LAST-MODIFIED:20261010T070000Z
+DTSTART:20261024T160000Z
+DTEND:20261024T180000Z
+SUMMARY:[Demo] Creek cleanup — Creek care team
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nA fictional Bay Area service opportunity for the Civ
+ icShift demonstration. Work alongside a coordinator and a small volunteer 
+ team.\n\nOrganization: Greenway Collective\n\nShift: Creek care team\n\nTi
+ mes use America/Los_Angeles.\n\nReview details and register in CivicShift:
+  https://chlo6.github.io/sec27/portal.html#/event/evt-creek
+LOCATION:Cupertino\, Cupertino\, California (fictional meeting point)
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-creek
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-creek/evt-creek-shift-2@civicshift.chlo6.github.io
+DTSTAMP:20261010T070000Z
+LAST-MODIFIED:20261010T070000Z
+DTSTART:20261024T180000Z
+DTEND:20261024T200000Z
+SUMMARY:[Demo] Creek cleanup — Trail stewardship
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nA fictional Bay Area service opportunity for the Civ
+ icShift demonstration. Work alongside a coordinator and a small volunteer 
+ team.\n\nOrganization: Greenway Collective\n\nShift: Trail stewardship\n\n
+ Times use America/Los_Angeles.\n\nReview details and register in CivicShif
+ t: https://chlo6.github.io/sec27/portal.html#/event/evt-creek
+LOCATION:Cupertino\, Cupertino\, California (fictional meeting point)
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-creek
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-pantry/sh-pantry@civicshift.chlo6.github.io
+DTSTAMP:20261003T070000Z
+LAST-MODIFIED:20261003T070000Z
+DTSTART:20261025T170000Z
+DTEND:20261025T193000Z
+SUMMARY:[Demo] Pantry Packing Team — Packing
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nSort shelf-stable donations and assemble weekly groc
+ ery boxes for local households.\n\nOrganization: Neighborhood Food Network
+ \n\nShift: Packing\n\nTimes use America/Los_Angeles.\n\nReview details and
+  register in CivicShift: https://chlo6.github.io/sec27/portal.html#/event/
+ evt-pantry
+LOCATION:Downtown Resource Hub\, 410 Cedar Road\, Downtown
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-pantry
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-books/evt-books-shift-1@civicshift.chlo6.github.io
+DTSTAMP:20261010T070000Z
+LAST-MODIFIED:20261010T070000Z
+DTSTART:20261028T223000Z
+DTEND:20261029T003000Z
+SUMMARY:[Demo] Reading support — Reading buddies
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nA fictional Bay Area service opportunity for the Civ
+ icShift demonstration. Work alongside a coordinator and a small volunteer 
+ team.\n\nOrganization: Bridge Learning Center\n\nShift: Reading buddies\n\
+ nTimes use America/Los_Angeles.\n\nReview details and register in CivicShi
+ ft: https://chlo6.github.io/sec27/portal.html#/event/evt-books
+LOCATION:Cupertino\, Cupertino\, California (fictional meeting point)
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-books
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-market/evt-market-shift-1@civicshift.chlo6.github.io
+DTSTAMP:20261010T070000Z
+LAST-MODIFIED:20261010T070000Z
+DTSTART:20261031T160000Z
+DTEND:20261031T180000Z
+SUMMARY:[Demo] Food pantry packing — Morning packing
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nA fictional Bay Area service opportunity for the Civ
+ icShift demonstration. Work alongside a coordinator and a small volunteer 
+ team.\n\nOrganization: Greenway Collective\n\nShift: Morning packing\n\nTi
+ mes use America/Los_Angeles.\n\nReview details and register in CivicShift:
+  https://chlo6.github.io/sec27/portal.html#/event/evt-market
+LOCATION:Sunnyvale\, Sunnyvale\, California (fictional meeting point)
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-market
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-market/evt-market-shift-2@civicshift.chlo6.github.io
+DTSTAMP:20261010T070000Z
+LAST-MODIFIED:20261010T070000Z
+DTSTART:20261031T180000Z
+DTEND:20261031T200000Z
+SUMMARY:[Demo] Food pantry packing — Community pickup
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nA fictional Bay Area service opportunity for the Civ
+ icShift demonstration. Work alongside a coordinator and a small volunteer 
+ team.\n\nOrganization: Greenway Collective\n\nShift: Community pickup\n\nT
+ imes use America/Los_Angeles.\n\nReview details and register in CivicShift
+ : https://chlo6.github.io/sec27/portal.html#/event/evt-market
+LOCATION:Sunnyvale\, Sunnyvale\, California (fictional meeting point)
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-market
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-tech/sh-tech@civicshift.chlo6.github.io
+DTSTAMP:20261008T070000Z
+LAST-MODIFIED:20261008T070000Z
+DTSTART:20261101T190000Z
+DTEND:20261101T210000Z
+SUMMARY:[Demo] Senior Tech Help Desk — Help desk
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nHelp older adults learn safe\, practical ways to use
+  phones\, email\, and video calling.\n\nOrganization: Bridge Learning Cent
+ er\n\nShift: Help desk\n\nTimes use America/Los_Angeles.\n\nReview details
+  and register in CivicShift: https://chlo6.github.io/sec27/portal.html#/ev
+ ent/evt-tech
+LOCATION:Northside Senior Center\, 19 Willow Lane\, Northside
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-tech
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-repair/evt-repair-shift-1@civicshift.chlo6.github.io
+DTSTAMP:20261010T070000Z
+LAST-MODIFIED:20261010T070000Z
+DTSTART:20261107T180000Z
+DTEND:20261107T200000Z
+SUMMARY:[Demo] Community tech help — Device help desk
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nA fictional Bay Area service opportunity for the Civ
+ icShift demonstration. Work alongside a coordinator and a small volunteer 
+ team.\n\nOrganization: Bridge Learning Center\n\nShift: Device help desk\n
+ \nTimes use America/Los_Angeles.\n\nReview details and register in CivicSh
+ ift: https://chlo6.github.io/sec27/portal.html#/event/evt-repair
+LOCATION:Cupertino\, Cupertino\, California (fictional meeting point)
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-repair
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-shelter/sh-shelter@civicshift.chlo6.github.io
+DTSTAMP:20260930T070000Z
+LAST-MODIFIED:20260930T070000Z
+DTSTART:20261107T173000Z
+DTEND:20261107T200000Z
+SUMMARY:[Demo] Shelter Enrichment Workshop — Workshop
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nCreate safe enrichment toys and organize adoption-da
+ y supplies for shelter animals.\n\nOrganization: Paws & Paths Rescue\n\nSh
+ ift: Workshop\n\nTimes use America/Los_Angeles.\n\nReview details and regi
+ ster in CivicShift: https://chlo6.github.io/sec27/portal.html#/event/evt-s
+ helter
+LOCATION:Paws & Paths Shelter\, 775 East Lane\, Eastside
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-shelter
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-wellness/sh-wellness@civicshift.chlo6.github.io
+DTSTAMP:20261002T070000Z
+LAST-MODIFIED:20261002T070000Z
+DTSTART:20261113T010000Z
+DTEND:20261113T030000Z
+SUMMARY:[Demo] Wellness Resource Translation — Translation review
+DESCRIPTION:Fictional CivicShift demo opportunity. Adding this calendar doe
+ s not sign you up.\n\nReview and format plain-language wellness resources 
+ for multilingual community distribution.\n\nOrganization: Community Wellne
+ ss Alliance\n\nShift: Translation review\n\nTimes use America/Los_Angeles.
+ \n\nReview details and register in CivicShift: https://chlo6.github.io/sec
+ 27/portal.html#/event/evt-wellness
+LOCATION:Online\, Video meeting link shared after approval
+URL:https://chlo6.github.io/sec27/portal.html#/event/evt-wellness
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

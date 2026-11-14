@@ -75,3 +75,8 @@ Publish the buildless `dist/` directory at `https://chlo6.github.io/sec27/` usin
 ## Interface copy
 
 Use direct page names and task descriptions: Quests, Opportunities, Dashboard, and Progress. Keep quest/event copy specific to the volunteer activity. Refresh unchanged seed copy in saved demos without replacing user edits or service records.
+
+
+## Opportunities calendar and public subscription
+
+Add the `#/explore/calendar` view with month deep links, shared filters, per-shift capacity/eligibility checks, new-post labels, and a mobile agenda. Preserve the personal registration calendar. Publish `dist/opportunities.ics` from committed fictional event sources only; never upload browser-local records. Generate stable per-shift entries in Pacific time, converted to UTC, with cancellation support and safe iCalendar formatting. Offer copy-link, Google From URL instructions, and one-time file download. Regenerate the feed during Pages deployment. A Google-hosted calendar, account authorization, and publication of browser-only organizer edits remain outside this static release.

@@ -1,0 +1,58 @@
+.opportunity-view-tabs { display:flex; flex-wrap:wrap; gap:5px; }
+.opportunity-view-tabs a { display:flex; align-items:center; min-height:44px; padding:0 17px; border:1px solid var(--line); border-radius:3px; font-size:13px; }
+.opportunity-view-tabs a[aria-current] { color:#fff; background:var(--blue-button); border-color:var(--blue-button); }
+.opportunity-calendar { border:1px solid var(--line); background:var(--paper); border-radius:3px; overflow:hidden; }
+.opportunity-calendar-head { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px; }
+.opportunity-calendar-head h2 { font-family:Georgia,serif; font-size:30px; font-weight:400; margin:0 0 7px; }
+.opportunity-calendar-head p { color:var(--soft); font-size:13px; margin:0; }
+.opportunity-month-nav { display:flex; gap:8px; }
+.opportunity-month-nav .button { padding:0 14px; }
+.calendar-note { font-size:12px; line-height:1.7; color:var(--soft); }
+.calendar-context { margin:0; padding:0 24px 22px; }
+.opportunity-month table { width:100%; border-collapse:collapse; table-layout:fixed; }
+.opportunity-month th { border-block:1px solid var(--line); padding:13px 5px; font-size:11px; font-weight:600; color:var(--soft); text-align:center; }
+.opportunity-month abbr { text-decoration:none; }
+.opportunity-month td { padding:9px 7px; height:108px; vertical-align:top; border:1px solid var(--line); border-left:0; }
+.opportunity-month td:last-child { border-right:0; }
+.opportunity-month tr:last-child td { border-bottom:0; }
+.opportunity-month td>time { font-size:12px; display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; }
+.opportunity-month td.demo-today>time { color:#fff; background:var(--blue-button); border-radius:50%; }
+.opportunity-month .calendar-padding { background:var(--cream); }
+.opportunity-slot { display:flex; flex-direction:column; gap:4px; padding:10px 8px; margin-top:8px; border-left:2px solid var(--blue); background:var(--blue-soft); font-size:11px; line-height:1.5; overflow-wrap:anywhere; color:var(--ink); }
+.opportunity-slot:hover { outline:1px solid var(--blue); }
+.opportunity-slot strong { font-size:12px; font-weight:650; line-height:1.45; }
+.opportunity-slot .slot-time { font-size:10px; color:var(--soft); }
+.opportunity-slot small { display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px; font-size:10px; }
+.new-opportunity { display:inline-block; color:var(--blue); font-size:10px; font-weight:700; }
+.opportunity-agenda { display:none; }
+.calendar-empty { padding:30px 24px; text-align:center; border-top:1px solid var(--line); }
+.calendar-empty h3 { font-size:17px; margin:0 0 8px; }
+.calendar-empty p { margin:0; color:var(--soft); font-size:13px; }
+.calendar-subscription { margin-top:24px; border:1px solid var(--line); border-radius:3px; background:var(--paper); }
+.calendar-subscription>summary { padding:22px 24px; cursor:pointer; font-size:15px; font-weight:600; }
+.subscription-content { padding:0 24px 24px; }
+.subscription-content>p,.subscription-content ol { font-size:13px; line-height:1.7; }
+.subscription-content ol { padding-left:20px; }
+.subscription-url { display:flex; align-items:flex-end; gap:12px; margin:20px 0 14px; }
+.subscription-url .field { flex:1; min-width:0; }
+.subscription-url input { width:100%; min-height:44px; font-size:12px; }
+.subscription-actions { display:flex; flex-wrap:wrap; gap:10px; }
+.calendar-help { font-size:12px; text-decoration:underline; color:var(--blue); }
+@media (max-width:760px) {
+  .opportunity-calendar-head { align-items:flex-start; flex-direction:column; gap:15px; padding:20px; }
+  .calendar-context { padding:0 20px 20px; }
+  .opportunity-month { display:none; }
+  .opportunity-agenda { display:block; }
+  .agenda-day { border-top:1px solid var(--line); padding:20px; }
+  .agenda-day h3 { font-size:14px; font-weight:600; margin:0 0 12px; }
+  .agenda-day .opportunity-slot { padding:14px; font-size:13px; }
+  .agenda-day .opportunity-slot strong { font-size:16px; }
+  .agenda-day .opportunity-slot small,.agenda-day .opportunity-slot .slot-time { font-size:12px; }
+  .subscription-url { flex-direction:column; align-items:stretch; }
+  .subscription-content { padding:0 20px 20px; }
+}
+
+.opportunity-filter-panel { margin:0 0 24px; border-block:1px solid var(--line); }
+.opportunity-filter-panel>summary { cursor:pointer; padding:17px 0; font-size:13px; font-weight:600; }
+.opportunity-filter-panel[open]>summary { padding-bottom:8px; }
+.opportunity-filter-panel .filter-bar { margin-bottom:16px; }

@@ -41,3 +41,9 @@ The team-approved CivicShift gamified app plan defines the original scoring poli
 Competitive references discussed during planning include [POINT](https://pointapp.org/nonprofit-features/), [GivePulse](https://learn.givepulse.com/service-learning), and [Idealist](https://www.idealist.org/en/volunteer). These informed comparisons with existing discovery and verification workflows; CivicShift does not integrate their services or claim affiliation.
 
 All new quest icons, badges, game layouts and fictional examples are original HTML/CSS/text. Codex assisted with implementation, testing and documentation; the student team should review and adapt the work and follow its competition disclosure rules.
+
+
+## Calendar integration
+
+- [Google Calendar Help: Add a public calendar by URL](https://support.google.com/calendar/answer/37100?hl=en), checked November 14, 2026. Informed the computer-browser subscription steps and Google setup link. CivicShift is not affiliated with Google.
+- [RFC 5545: iCalendar](https://www.rfc-editor.org/rfc/rfc5545), checked November 14, 2026. Informed original serializer implementation: stable event identifiers, UTC timestamps, text escaping, line folding, and CRLF. No calendar library or external script is bundled.

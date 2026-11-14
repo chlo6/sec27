@@ -20,6 +20,20 @@ After setup, each push to `main` runs the regression tests and publishes only `d
 
 Each visitor has separate browser-local demo records. Your teammate can explore the same interface and fictional starting data, but registrations and profile edits do not sync between your browsers.
 
+## Opportunities calendar
+
+Open **Opportunities → Calendar**, or use the [direct calendar link](https://chlo6.github.io/sec27/portal.html#/explore/calendar). Browse months, expand Search & filters, and select a shift to review its details. Desktop uses a month grid; small screens use a date list. New labels mean posted within seven days of the saved demo clock. The existing personal calendar still shows registered shifts.
+
+To add all published opportunities to Google Calendar:
+
+1. Expand **Add opportunities to your calendar** and select **Copy link**.
+2. On a computer, open Google Calendar and choose **Other calendars → + → From URL**.
+3. Paste `https://chlo6.github.io/sec27/opportunities.ics` and select **Add calendar**. [Google's instructions](https://support.google.com/calendar/answer/37100?hl=en).
+
+The feed uses the original fictional October–November 2026 dates and Pacific time. It includes all published source opportunities, independent of personal filters; it does not register anyone or share browser-only edits or personal records. Google controls when subscribed feeds refresh. Downloading `.ics` is a one-time import, not a subscription.
+
+For team updates, edit the published event data in `dist/data.js` or `dist/community-data.js`, retain event/shift IDs, set `updatedAt` or `updatedDate` when changing existing events, and run `npm run generate:calendar`. Keep canceled events marked `canceled` to publish their cancellation. Commit the sources and generated feed; GitHub Pages also regenerates the feed before deploying.
+
 ## Run locally
 
 ```bash
@@ -91,7 +105,7 @@ Unreadable or unsupported future-version storage is not silently replaced. Expor
 npm test
 ```
 
-Uses Node's built-in test runner (Node 20+), with no packages to install. The automated suite has 40 passing tests. See [verification results](docs/VERIFICATION.md) and [implementation plan](docs/IMPLEMENTATION_PLAN.md) for verification scope and walkthroughs.
+Uses Node's built-in test runner (Node 20+), with no packages to install. The automated suite has 51 passing tests. See [verification results](docs/VERIFICATION.md) and [implementation plan](docs/IMPLEMENTATION_PLAN.md) for verification scope and walkthroughs.
 
 ## Source map
 
